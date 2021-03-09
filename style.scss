@@ -1,0 +1,140 @@
+html,body{ 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+
+    &[class="name"] {
+        margin-bottom : 1rem;
+    }
+}
+
+hr{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+    margin: 5% 0;
+}
+
+.container {
+    background: black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 1rem 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    div[class$="wrapper"] {
+        display: flex;
+        width: 100%;
+    }
+
+    input[type="button"] {
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        padding: 0.5rem;
+        width: 4rem;
+
+        &:hover {
+            background-color: #9df4ff;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-color: #4aeaff;
+        }
+    }
+
+    .title-wrapper {
+        display: inherit;
+        justify-content: center;
+        color: #c99d25;
+        .title {
+            font-size: 2.5rem;
+        }
+    }
+
+    .count-wrapper {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column nowrap;
+        padding: 1rem 0;
+
+        .countBtn-block {
+            margin-bottom: 0.5rem;
+        }
+
+        .countResult-block {
+            font-size: 1.2rem;
+        }
+    }
+
+    .scoreBoard-wrapper{ 
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 0;
+        
+        .board-block {
+            background-color: #122e13;
+            display: inherit;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 0;
+            
+            div[class^="board"]{
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+            }
+    
+            div[class^="score"]{
+                border: 1px solid white;
+                height: 4rem;
+                width: 4.5rem;
+            }
+
+        }
+
+        input {
+            height: 3rem;
+            width: 4rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+        }
+    }
+
+    .control-wrapper {
+        justify-content: space-around;
+        padding: 1rem 0;
+
+        div[class^="control"] {
+            display: inherit;
+            flex-flow: column nowrap;
+            align-items: center;
+        }
+
+        input {
+            height: 3rem;
+            width: 5rem;
+            font-size: 1.3rem;
+        }
+        .button-block {
+
+            input:nth-child(2) {
+                    margin-left: 1rem;
+            }
+        }
+    }
+}
