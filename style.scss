@@ -137,5 +137,12 @@ hr{
                     margin-left: 1rem;
             }
         }
+
+        .off {
+            &:hover{
+                cursor: not-allowed;
+                background: initial;
+            }
+        }
     }
 }

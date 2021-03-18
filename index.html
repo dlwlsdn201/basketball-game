@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's play basketball game! </title>
     <link rel="stylesheet" href="style.css">
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.js
+    '></script>
 </head>
 <body>
     <div class="container">
-        <div class="title-wrapper" id="titleWrapper">아</div>
+        <div class="title-wrapper" id="titleWrapper"></div>
         <div class="count-wrapper" id="countWrapper"></div>
         <div class="scoreBoard-wrapper" id="scoreBoardWrapper"></div>
         <div class="result-wrapper" id="resultWrapper"></div>
@@ -49,8 +50,8 @@
                     <div class="score-user"></div>
                 </div>
             </div>
-            <p class="message" id="message">상단에 슛 횟수를 정하신 후 Start 버튼을 눌러주세요. </p>
-            <input type="button" value="Start"/>
+            <p class="message" id="message"></p>
+            <input id="startBtn" type="button" value="Start"/>
         `
     };
 
@@ -70,6 +71,7 @@
         `
     };
 
+
     title();
     count();
     scoreBoard();
@@ -77,5 +79,7 @@
 </script>
 <script type="module" src="./js/gameCount.js"></script>
 <script type="module" src="./js/shootProbability.js"></script>
+<script type="module" src="./js/control.js"></script>
+<script type="module" src="./js/start.js"></script>
 </body>
 </html>

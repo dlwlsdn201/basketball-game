@@ -183,4 +183,9 @@ hr {
 .container .control-wrapper .button-block input:nth-child(2) {
   margin-left: 1rem;
 }
+
+.container .control-wrapper .off:hover {
+  cursor: not-allowed;
+  background: initial;
+}
 /*# sourceMappingURL=style.css.map */

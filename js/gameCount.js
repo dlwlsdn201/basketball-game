@@ -1,7 +1,8 @@
+
+
+
 const CountButtons = document.querySelectorAll('#countBtn');
 const ShowCount = document.querySelector('#countShow');
-
-export const gameCount = {count : 0};
 
 const setCount = (event) => {
     gameCount.count = Number(event.currentTarget.value.slice(0,2));
