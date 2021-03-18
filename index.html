@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's play basketball game! </title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="container">
@@ -25,13 +26,13 @@
     function count(){
         document.querySelector('#countWrapper').innerHTML = `
         <div class="countBtn-block">
-                <input type="button" value="10회"></input>
-                <input type="button" value="20회"></input>
-                <input type="button" value="20회"></input>
+                <input id="countBtn" type="button" value="10회"></input>
+                <input id="countBtn" type="button" value="20회"></input>
+                <input id="countBtn" type="button" value="30회"></input>
             </div>
             <div class="countResult-block" id="countResult-block">
                 <span class="count-text">남은 슛 횟수 :</span>
-                <span class="count-result" id="countResult">##</span>
+                <span class="count-result" id="countShow">0</span>
             </div>
         `
     };
@@ -74,5 +75,6 @@
     scoreBoard();
     control();
 </script>
+<script src="./js/gameCount.js"></script>
 </body>
 </html>
