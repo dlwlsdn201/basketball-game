@@ -49,7 +49,7 @@
                     <div class="score-user"></div>
                 </div>
             </div>
-            <p class="message" id="message">메세지 박스</p>
+            <p class="message" id="message">상단에 슛 횟수를 정하신 후 Start 버튼을 눌러주세요. </p>
             <input type="button" value="Start"/>
         `
     };
@@ -58,13 +58,13 @@
         document.querySelector('#controlWrapper').innerHTML = `
             <div class="control-com">
                 <h2 class="name">컴퓨터</h2>
-                <input type="button" value="랜덤슛"/>
+                <input id="comShootBtn" type="button" name="com" value="랜덤슛"/>
             </div>
             <div class="control-user">
                 <h2 class="name">사용자</h2>
                 <div class="button-block">
-                    <input type="button" value="2점슛"/>
-                    <input type="button" value="3점슛"/>
+                    <input id="userShootBtn2" name="user" type="button" value="2점슛"/>
+                    <input id="userShootBtn3" name="user" type="button" value="3점슛"/>
                 </div>
             </div>
         `
@@ -75,6 +75,7 @@
     scoreBoard();
     control();
 </script>
-<script src="./js/gameCount.js"></script>
+<script type="module" src="./js/gameCount.js"></script>
+<script type="module" src="./js/shootProbability.js"></script>
 </body>
 </html>
