@@ -118,23 +118,22 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/start.js":[function(require,module,exports) {
-// import {board} from './shootProbability.js';
-// import {setTurn} from './control.js';
-// import {gameCount} from './gameCount.js';
-var startBtn = document.querySelector('#startBtn');
-var message = document.querySelector('#message');
-var scoreCom = document.querySelector('.score-com');
-var scoreUser = document.querySelector('.score-user'); // const {init, com, user, start, error} = messageBox;
-
-var gameStart = function gameStart() {// if(gameCount.selected === false) {
-  //     return message.textContent = error;
-  // }
-  // scoreCom.textContent = board.ComScore;
-  // scoreUser.textContent = board.userScore;
-  // board.turn = 'com';
-  // setTurn();
-}; // message.textContent = init;
-// startBtn.addEventListener("click", gameStart);
+// import store from '../modules/main';
+// import {start} from '../modules/main';
+// const startBtn = document.querySelector('#startBtn');
+// const message = document.querySelector('#message');
+// const scoreCom = document.querySelector('.score-com');
+// const scoreUser = document.querySelector('.score-user');
+// const state = store.getState();
+// console.log('state:', state);
+// const render=()=> {
+//     message.textContent = state.text;
+//     scoreCom.textContent = state.comScore;
+//     scoreUser.textContent = state.userScore;
+// }
+// render();
+// store.subscribe(render);
+// // startBtn.onclick = () => store.dispatch(start());
 },{}],"C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -163,7 +162,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50767" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

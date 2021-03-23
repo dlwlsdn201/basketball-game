@@ -855,45 +855,90 @@ function isCrushed() {}
 if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
   warning('You are currently using minified code outside of NODE_ENV === "production". ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or setting mode to production in webpack (https://webpack.js.org/concepts/mode/) ' + 'to ensure you have the correct code for your production build.');
 }
-},{"symbol-observable":"node_modules/symbol-observable/es/index.js"}],"modules/score.js":[function(require,module,exports) {
+},{"symbol-observable":"node_modules/symbol-observable/es/index.js"}],"node_modules/redux-devtools-extension/index.js":[function(require,module,exports) {
+'use strict';
+
+var compose = require('redux').compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : function () {
+        if (arguments.length === 0) return undefined;
+        if (typeof arguments[0] === 'object') return compose;
+        return compose.apply(null, arguments);
+      };
+
+exports.devToolsEnhancer =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__
+    : function () {
+        return function (noop) {
+          return noop;
+        };
+      };
+
+},{"redux":"node_modules/redux/es/redux.js"}],"modules/main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.userSCORE3 = exports.userSCORE2 = exports.comSCORE3 = exports.comSCORE2 = void 0;
+exports.default = exports.successOrfalse3 = exports.successOrfalse2 = exports.fail3 = exports.fail2 = exports.success3 = exports.success2 = exports.error = exports.user = exports.com = exports.start = exports.remainCount = exports.count30 = exports.count20 = exports.count10 = exports.userSCORE3 = exports.userSCORE2 = exports.comSCORE2 = exports.comSCORE3 = void 0;
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+var _redux = require("redux");
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var _reduxDevtoolsExtension = require("redux-devtools-extension");
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var CountButtons = document.querySelectorAll('#countBtn');
+var ShowCount = document.querySelector('#countShow');
+var startBtn = document.querySelector('#startBtn');
+var message = document.querySelector('#message');
+var scoreCom = document.querySelector('.score-com');
+var scoreUser = document.querySelector('.score-user');
+var comShootBtn = document.querySelector('#comShootBtn');
+var userShootBtn2 = document.querySelector('#userShootBtn2');
+var userShootBtn3 = document.querySelector('#userShootBtn3'); // 액션명 생성
 
-// 액션명 생성
-var COM_SCORE2 = 'com/SCORE2';
 var COM_SCORE3 = 'com/SCORE3';
+var COM_SCORE2 = 'com/SCORE2';
 var USER_SCORE2 = 'user/SCORE2';
-var USER_SCORE3 = 'user/SCORE3'; // 액션정의함수 생성
-
-var comSCORE2 = function comSCORE2() {
-  return {
-    type: 'score/COM_SCORE2'
-  };
-};
-
-exports.comSCORE2 = comSCORE2;
+var USER_SCORE3 = 'user/SCORE3';
+var COUNT10 = 'count/COUNT10';
+var COUNT20 = 'count/COUNT20';
+var COUNT30 = 'count/COUNT30';
+var REMAIN_COUNT = 'count/REMAIN_COUNT';
+var SUCCESS_OR_FALSE2 = 'success/SUCCESS_OR_FALSE2';
+var SUCCESS_OR_FALSE3 = 'success/SUCCESS_OR_FALSE3';
+var START = 'message/START';
+var COM = 'message/COM';
+var USER = 'message/USER';
+var ERROR = 'message/ERROR';
+var SUCCESS2 = 'message/SUCCESS2';
+var SUCCESS3 = 'message/SUCCESS3';
+var FAIL2 = 'message/FAIL2';
+var FAIL3 = 'message/FAIL3'; // 액션정의함수 생성
 
 var comSCORE3 = function comSCORE3() {
   return {
-    type: 'score/COM_SCORE3'
+    type: COM_SCORE3
   };
 };
 
 exports.comSCORE3 = comSCORE3;
 
+var comSCORE2 = function comSCORE2() {
+  return {
+    type: COM_SCORE2
+  };
+};
+
+exports.comSCORE2 = comSCORE2;
+
 var userSCORE2 = function userSCORE2() {
   return {
-    type: 'score/USER_SCORE2'
+    type: USER_SCORE2
   };
 };
 
@@ -901,68 +946,11 @@ exports.userSCORE2 = userSCORE2;
 
 var userSCORE3 = function userSCORE3() {
   return {
-    type: 'score/USER_SCORE3'
+    type: USER_SCORE3
   };
-}; //초기값 생성
-
+};
 
 exports.userSCORE3 = userSCORE3;
-var initialState = {
-  userScore: 0,
-  comScore: 0
-}; //리듀서 함수 생성
-
-function score() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case COM_SCORE2:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        comScore: state.comScore + 2
-      });
-
-    case COM_SCORE3:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        comScore: state.comScore + 3
-      });
-
-    case USER_SCORE2:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        userScore: state.userScore + 2
-      });
-
-    case USER_SCORE3:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        userScore: state.userScore + 3
-      });
-
-    default:
-      return state;
-  }
-}
-
-;
-var _default = score;
-exports.default = _default;
-},{}],"modules/count.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.count30 = exports.count20 = exports.count10 = void 0;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//액션명 생성
-var COUNT10 = 'count/COUNT10';
-var COUNT20 = 'count/COUNT20';
-var COUNT30 = 'count/COUNT30'; //액션정의함수 생성
 
 var count10 = function count10() {
   return {
@@ -987,133 +975,23 @@ var count30 = function count30() {
     type: COUNT30,
     count: 30
   };
-}; //초기값 생성
-
+};
 
 exports.count30 = count30;
-var initialState = {
-  selected: false,
-  count: 0
-}; //리듀서 함수 생성
 
-function count() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case COUNT10:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        selected: true,
-        count: action.count
-      });
-
-    case COUNT20:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        selected: true,
-        count: action.count
-      });
-
-    case COUNT30:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        selected: true,
-        count: action.count
-      });
-
-    default:
-      return state;
-  }
-}
-
-var _default = count;
-exports.default = _default;
-},{}],"modules/turn.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.userTurn = exports.comTurn = void 0;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//액션명 생성
-var COM = 'turn/COM';
-var USER = 'turn/USER'; //액션정의함수 생성
-
-var comTurn = function comTurn() {
+var remainCount = function remainCount() {
   return {
-    type: COM,
-    turn: 'com'
+    type: REMAIN_COUNT
   };
 };
 
-exports.comTurn = comTurn;
-
-var userTurn = function userTurn() {
-  return {
-    type: USER,
-    turn: 'user'
-  };
-}; //초기값 생성
-
-
-exports.userTurn = userTurn;
-var initialState = {
-  turn: null
-}; //리듀서 함수 생성
-
-function setTurn() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case COM:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        turn: 'com'
-      });
-
-    case USER:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        turn: 'user'
-      });
-
-    default:
-      return state;
-  }
-}
-
-var _default = setTurn;
-exports.default = _default;
-},{}],"modules/message.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.fail3 = exports.fail2 = exports.success3 = exports.success2 = exports.error = exports.user = exports.com = exports.start = void 0;
-//액션명  생성
-var INIT = 'message/INIT';
-var START = 'message/START';
-var COM = 'message/COM';
-var USER = 'message/USER';
-var ERROR = 'message/ERROR';
-var SUCCESS2 = 'message/SUCCESS2';
-var SUCCESS3 = 'message/SUCCESS3';
-var FAIL2 = 'message/FAIL2';
-var FAIL3 = 'message/FAIL3'; //액션정의함수 생성
-// export const init = () => ({
-//     type: INIT,
-//     text:'상단에 슛 횟수를 정하신 후 Start 버튼을 눌러주세요' 
-//     });
+exports.remainCount = remainCount;
 
 var start = function start() {
   return {
     type: START,
-    text: 'com 먼저 시작합니다.'
+    text: 'com 먼저 시작합니다.',
+    turn: 'com'
   };
 };
 
@@ -1122,7 +1000,8 @@ exports.start = start;
 var com = function com() {
   return {
     type: COM,
-    text: 'com 차례 입니다.'
+    text: 'com 차례 입니다.',
+    turn: 'com'
   };
 };
 
@@ -1131,7 +1010,8 @@ exports.com = com;
 var user = function user() {
   return {
     type: USER,
-    text: '사용자 님 차례입니다'
+    text: 'user 님 차례입니다',
+    turn: 'user'
   };
 };
 
@@ -1178,139 +1058,322 @@ var fail3 = function fail3() {
     type: FAIL3,
     text: '3점슛 실패...'
   };
+};
+
+exports.fail3 = fail3;
+
+var successOrfalse2 = function successOrfalse2() {
+  return {
+    type: SUCCESS_OR_FALSE2,
+    probability: Number(Math.random().toFixed(2))
+  };
+};
+
+exports.successOrfalse2 = successOrfalse2;
+
+var successOrfalse3 = function successOrfalse3() {
+  return {
+    type: SUCCESS_OR_FALSE3,
+    probability: Number(Math.random().toFixed(2))
+  };
 }; //초기값 생성
 
 
-exports.fail3 = fail3;
+exports.successOrfalse3 = successOrfalse3;
 var initialState = {
-  text: '상단에 슛 횟수를 정하신 후 Start 버튼을 눌러주세요'
+  userScore: 0,
+  comScore: 0,
+  selected: false,
+  count: 0,
+  turn: null,
+  text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요',
+  ShootType: 0,
+  probability: 0
 }; //리듀서 함수 생성
 
-function setMessage() {
+function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  // console.log(action.type);
+  var newState;
 
   switch (action.type) {
+    case COM_SCORE2:
+      // return {...state, 
+      //         comScore: state.comScore + 2,
+      //         };
+      newState = Object.assign({}, state, {
+        comScore: state.comScore + 2
+      });
+      break;
+
+    case COM_SCORE3:
+      // return { ...state,
+      //         comScore: state.comScore + 3,
+      //         };
+      newState = Object.assign({}, state, {
+        comScore: state.comScore + 3
+      });
+      break;
+
+    case USER_SCORE2:
+      // return { ...state,
+      //         userScore: state.userScore + 2,
+      //         };
+      newState = Object.assign({}, state, {
+        userScore: state.userScore + 2
+      });
+      break;
+
+    case USER_SCORE3:
+      // return { ...state,
+      //         userScore: state.userScore + 3,
+      //         };
+      newState = Object.assign({}, state, {
+        userScore: state.userScore + 3
+      });
+      break;
+
+    case COUNT10:
+      // return {...state,selected: true, count: action.count};
+      newState = Object.assign({}, state, {
+        selected: true,
+        count: action.count
+      });
+      break;
+
+    case COUNT20:
+      // return {...state,selected: true, count: action.count};
+      newState = Object.assign({}, state, {
+        selected: true,
+        count: action.count
+      });
+      break;
+
+    case COUNT30:
+      // return {...state,selected: true, count: action.count};
+      newState = Object.assign({}, state, {
+        selected: true,
+        count: action.count
+      });
+      break;
+
+    case REMAIN_COUNT:
+      newState = Object.assign({}, state, {
+        count: state.count - 1
+      });
+      break;
+
     case START:
-      return {
-        text: action.text
-      };
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
+        text: action.text,
+        turn: action.turn
+      });
+      break;
 
     case COM:
-      return {
-        text: action.text
-      };
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
+        text: action.text,
+        turn: action.turn
+      });
+      break;
 
     case USER:
-      return {
-        text: action.text
-      };
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
+        text: action.text,
+        turn: action.turn
+      });
+      break;
 
     case ERROR:
-      return {
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
         text: action.text
-      };
+      });
+      break;
 
     case SUCCESS2:
-      return {
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
         text: action.text
-      };
+      });
+      break;
 
     case SUCCESS3:
-      return {
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
         text: action.text
-      };
+      });
+      break;
 
     case FAIL2:
-      return {
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
         text: action.text
-      };
+      });
+      break;
 
     case FAIL3:
-      return {
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
         text: action.text
-      };
+      });
+      break;
+
+    case SUCCESS_OR_FALSE2:
+      // return {...state,text : action.text};
+      newState = Object.assign({}, state, {
+        probability: action.probability
+      });
+      break;
+
+    case SUCCESS_OR_FALSE3:
+      newState = Object.assign({}, state, {
+        probability: action.probability
+      });
+      break;
 
     default:
       return state;
   }
+
+  return newState;
 }
 
 ;
-var _default = setMessage;
-exports.default = _default;
-},{}],"modules/index.js":[function(require,module,exports) {
-"use strict";
+var store = (0, _redux.createStore)(reducer, (0, _reduxDevtoolsExtension.composeWithDevTools)());
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var setTurn = function setTurn() {
+  var state = store.getState();
 
-var _redux = require("redux");
+  if (state.count !== 0) {
+    if (state.turn === 'com') {
+      userShootBtn2.classList.add('off');
+      userShootBtn3.classList.add('off');
+      comShootBtn.classList.remove('off');
+    } else if (state.turn === 'user') {
+      comShootBtn.classList.add('off');
+      userShootBtn2.classList.remove('on');
+      userShootBtn3.classList.remove('on');
+    } else {
+      message.textContent = state.text;
+    }
+  }
+};
 
-var _score = _interopRequireDefault(require("./score"));
+setTurn();
+store.subscribe(setTurn);
 
-var _count = _interopRequireDefault(require("./count"));
+var render = function render() {
+  var state = store.getState();
+  ShowCount.textContent = state.count;
+  console.log('여기', state.turn === 'user');
+  message.textContent = state.text;
+  scoreCom.textContent = state.comScore;
+  scoreUser.textContent = state.userScore;
 
-var _turn = _interopRequireDefault(require("./turn"));
+  if (state.turn === 'com') {
+    userShootBtn2.classList.add('off');
+    userShootBtn3.classList.add('off');
+    comShootBtn.classList.remove('off');
+  }
 
-var _message = _interopRequireDefault(require("./message"));
+  if (state.turn === 'user') {
+    comShootBtn.classList.add('off');
+    userShootBtn2.classList.remove('off');
+    userShootBtn3.classList.remove('off');
+  }
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+render();
+store.subscribe(render);
 
-var rootReducer = (0, _redux.combineReducers)({
-  score: _score.default,
-  count: _count.default,
-  setTurn: _turn.default,
-  setMessage: _message.default
-});
-var _default = rootReducer;
-exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./score":"modules/score.js","./count":"modules/count.js","./turn":"modules/turn.js","./message":"modules/message.js"}],"node_modules/redux-devtools-extension/index.js":[function(require,module,exports) {
-'use strict';
+CountButtons[0].onclick = function () {
+  return store.dispatch(count10());
+};
 
-var compose = require('redux').compose;
+CountButtons[1].onclick = function () {
+  return store.dispatch(count20());
+};
 
-exports.__esModule = true;
-exports.composeWithDevTools =
-  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : function () {
-        if (arguments.length === 0) return undefined;
-        if (typeof arguments[0] === 'object') return compose;
-        return compose.apply(null, arguments);
-      };
+CountButtons[2].onclick = function () {
+  return store.dispatch(count30());
+};
 
-exports.devToolsEnhancer =
-  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
-    ? window.__REDUX_DEVTOOLS_EXTENSION__
-    : function () {
-        return function (noop) {
-          return noop;
-        };
-      };
+startBtn.onclick = function () {
+  var state = store.getState();
+  state.selected ? store.dispatch(start()) : store.dispatch(error());
+};
 
-},{"redux":"node_modules/redux/es/redux.js"}],"index.js":[function(require,module,exports) {
-"use strict";
+comShootBtn.onclick = function () {
+  var state = store.getState();
+  var Probability = Number(Math.random().toFixed(2));
+  console.log('Probability:', Probability);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+  if (Probability <= 0.75) {
+    console.log('2점 슛');
+    store.dispatch(successOrfalse2());
+    console.log(state.probability);
 
-var _redux = require("redux");
+    if (state.probability > 0.25) {
+      store.dispatch(success2());
+      store.dispatch(comSCORE2());
+    } else {
+      store.dispatch(fail2());
+    }
+  } else {
+    console.log('3점 슛');
+    store.dispatch(successOrfalse3());
 
-var _index = _interopRequireDefault(require("./modules/index"));
+    if (state.probability <= 0.35) {
+      store.dispatch(success3());
+      store.dispatch(comSCORE3());
+    } else {
+      store.dispatch(fail3());
+    }
+  }
 
-var _reduxDevtoolsExtension = require("redux-devtools-extension");
+  store.dispatch(user());
+  store.dispatch(remainCount());
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+userShootBtn2.onclick = function () {
+  var state = store.getState();
+  console.log('2점 슛');
+  store.dispatch(successOrfalse2());
 
-var store = (0, _redux.createStore)(_index.default, (0, _reduxDevtoolsExtension.composeWithDevTools)());
+  if (state.probability > 0.25) {
+    store.dispatch(success2());
+    store.dispatch(userSCORE2());
+  } else {
+    store.dispatch(fail2());
+  }
+
+  store.dispatch(com());
+  store.dispatch(remainCount());
+};
+
+userShootBtn3.onclick = function () {
+  var state = store.getState();
+  store.dispatch(successOrfalse3());
+
+  if (state.probability <= 0.35) {
+    store.dispatch(success3());
+    store.dispatch(userSCORE3());
+  } else {
+    store.dispatch(fail3());
+  }
+
+  store.dispatch(com());
+  store.dispatch(remainCount());
+};
+
 var _default = store;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./modules/index":"modules/index.js","redux-devtools-extension":"node_modules/redux-devtools-extension/index.js"}],"C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","redux-devtools-extension":"node_modules/redux-devtools-extension/index.js"}],"C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1338,7 +1401,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50767" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49904" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1514,5 +1577,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/basketball-game__github.e31bb0bc.js.map
+},{}]},{},["C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","modules/main.js"], null)
+//# sourceMappingURL=/main.432ed99d.js.map

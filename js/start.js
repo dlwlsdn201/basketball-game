@@ -1,25 +1,21 @@
-// import {board} from './shootProbability.js';
-// import {setTurn} from './control.js';
-// import {gameCount} from './gameCount.js';
+// import store from '../modules/main';
+// import {start} from '../modules/main';
 
-const startBtn = document.querySelector('#startBtn');
-const message = document.querySelector('#message');
-const scoreCom = document.querySelector('.score-com');
-const scoreUser = document.querySelector('.score-user');
+// const startBtn = document.querySelector('#startBtn');
+// const message = document.querySelector('#message');
+// const scoreCom = document.querySelector('.score-com');
+// const scoreUser = document.querySelector('.score-user');
 
+// const state = store.getState();
+// console.log('state:', state);
+// const render=()=> {
+//     message.textContent = state.text;
+//     scoreCom.textContent = state.comScore;
+//     scoreUser.textContent = state.userScore;
+// }
 
-// const {init, com, user, start, error} = messageBox;
-
-const gameStart=()=> {
-    // if(gameCount.selected === false) {
-    //     return message.textContent = error;
-    // }
-    // scoreCom.textContent = board.ComScore;
-    // scoreUser.textContent = board.userScore;
-    // board.turn = 'com';
-    // setTurn();
-}
+// render();
+// store.subscribe(render);
 
 
-// message.textContent = init;
-// startBtn.addEventListener("click", gameStart);
+// // startBtn.onclick = () => store.dispatch(start());

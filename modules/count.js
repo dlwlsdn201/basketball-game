@@ -13,7 +13,7 @@ export const count30 = () => ({type: COUNT30, count: 30});
 
 const initialState = {
     selected : false, 
-    count: 0
+    count: 0,
 };
 
 
@@ -22,11 +22,11 @@ const initialState = {
 function count(state=initialState, action) {
     switch(action.type) {
         case COUNT10:
-            return {selected: true, count: action.count};
+            return {...state,selected: true, count: action.count};
         case COUNT20:
-            return {selected: true, count: action.count};
+            return {...state,selected: true, count: action.count};
         case COUNT30:
-            return {selected: true, count: action.count};
+            return {...state,selected: true, count: action.count};
         default:
             return state;
     }

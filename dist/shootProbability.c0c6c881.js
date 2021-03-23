@@ -863,9 +863,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.userSCORE3 = exports.userSCORE2 = exports.comSCORE3 = exports.comSCORE2 = void 0;
 
-var _redux = _interopRequireDefault(require("redux"));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // 액션명 생성
 var COM_SCORE2 = 'com/SCORE2';
@@ -875,7 +877,7 @@ var USER_SCORE3 = 'user/SCORE3'; // 액션정의함수 생성
 
 var comSCORE2 = function comSCORE2() {
   return {
-    type: 'COM_SCORE2'
+    type: 'score/COM_SCORE2'
   };
 };
 
@@ -883,7 +885,7 @@ exports.comSCORE2 = comSCORE2;
 
 var comSCORE3 = function comSCORE3() {
   return {
-    type: 'COM_SCORE3'
+    type: 'score/COM_SCORE3'
   };
 };
 
@@ -891,7 +893,7 @@ exports.comSCORE3 = comSCORE3;
 
 var userSCORE2 = function userSCORE2() {
   return {
-    type: 'USER_SCORE2'
+    type: 'score/USER_SCORE2'
   };
 };
 
@@ -899,7 +901,7 @@ exports.userSCORE2 = userSCORE2;
 
 var userSCORE3 = function userSCORE3() {
   return {
-    type: 'USER_SCORE3'
+    type: 'score/USER_SCORE3'
   };
 }; //초기값 생성
 
@@ -916,39 +918,47 @@ function score() {
 
   switch (action.type) {
     case COM_SCORE2:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         comScore: state.comScore + 2
-      };
+      });
 
     case COM_SCORE3:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         comScore: state.comScore + 3
-      };
+      });
 
     case USER_SCORE2:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         userScore: state.userScore + 2
-      };
+      });
 
     case USER_SCORE3:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         userScore: state.userScore + 3
-      };
+      });
 
     default:
       return state;
   }
 }
 
+;
 var _default = score;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js"}],"modules/count.js":[function(require,module,exports) {
+},{}],"modules/count.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.count30 = exports.count20 = exports.count10 = void 0;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //액션명 생성
 var COUNT10 = 'count/COUNT10';
 var COUNT20 = 'count/COUNT20';
@@ -992,22 +1002,22 @@ function count() {
 
   switch (action.type) {
     case COUNT10:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         selected: true,
         count: action.count
-      };
+      });
 
     case COUNT20:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         selected: true,
         count: action.count
-      };
+      });
 
     case COUNT30:
-      return {
+      return _objectSpread(_objectSpread({}, state), {}, {
         selected: true,
         count: action.count
-      };
+      });
 
     default:
       return state;
@@ -1022,29 +1032,36 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.user = exports.com = void 0;
+exports.default = exports.userTurn = exports.comTurn = void 0;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //액션명 생성
 var COM = 'turn/COM';
 var USER = 'turn/USER'; //액션정의함수 생성
 
-var com = function com() {
+var comTurn = function comTurn() {
   return {
     type: COM,
-    name: 'com'
+    turn: 'com'
   };
 };
 
-exports.com = com;
+exports.comTurn = comTurn;
 
-var user = function user() {
+var userTurn = function userTurn() {
   return {
     type: USER,
-    name: 'user'
+    turn: 'user'
   };
 }; //초기값 생성
 
 
-exports.user = user;
+exports.userTurn = userTurn;
 var initialState = {
   turn: null
 }; //리듀서 함수 생성
@@ -1055,14 +1072,14 @@ function setTurn() {
 
   switch (action.type) {
     case COM:
-      return {
-        turn: action.name
-      };
+      return _objectSpread(_objectSpread({}, state), {}, {
+        turn: 'com'
+      });
 
     case USER:
-      return {
-        turn: action.name
-      };
+      return _objectSpread(_objectSpread({}, state), {}, {
+        turn: 'user'
+      });
 
     default:
       return state;
@@ -1314,9 +1331,8 @@ function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-on
 // - 2점 슛 던지기 (75%) | 3점 슛 던지기 (25%)
 // (2) 슛 종류별 성공 확률
 // - 2점 슛 성공 확률 (75%) | 3점 슛 성공 확률(35%)
-var state = _index.default.getState();
+var state = _index.default.getState(); //2점슛 
 
-console.log(state.score); //2점슛 
 
 var shoot2 = function shoot2(event) {
   var ShootProbability = Number(Math.random().toFixed(2));
@@ -1391,7 +1407,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50767" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

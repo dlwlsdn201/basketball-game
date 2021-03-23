@@ -11,7 +11,6 @@ import { comSCORE2, comSCORE3, userSCORE2, userSCORE3 } from '../modules/score';
 
 
 const state = store.getState();
-console.log(state.score);
 
 //2점슛 
 export const shoot2 = (event) => {

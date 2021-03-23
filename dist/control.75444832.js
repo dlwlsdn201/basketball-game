@@ -118,51 +118,37 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/control.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setTurn = void 0;
-// import {gameCount} from './gameCount.js';
-// import {shootType, shoot2, shoot3} from './shootProbability.js';
-// import {messageBox} from './start.js';
-var comShootBtn = document.querySelector('#comShootBtn');
-var userShootBtn2 = document.querySelector('#userShootBtn2');
-var userShootBtn3 = document.querySelector('#userShootBtn3');
-var message = document.querySelector('#message');
-
-var setTurn = function setTurn() {
-  console.log(gameCount.count);
-
-  if (gameCount.count !== 0) {
-    if (board.turn === 'com') {
-      userShootBtn2.classList.add('off');
-      userShootBtn3.classList.add('off');
-      comShootBtn.classList.remove('off'); // init();
-
-      message.textContent = messageBox.com;
-      comShootBtn.addEventListener('click', shootType);
-      board.turn = 'user';
-    } else if (board.turn === 'user') {
-      comShootBtn.classList.add('off');
-      userShootBtn2.classList.remove('on');
-      userShootBtn3.classList.remove('on'); // init();
-
-      message.textContent = messageBox.user;
-      userShootBtn2.addEventListener('click', shoot2);
-      userShootBtn3.addEventListener('click', shoot3);
-      board.turn = 'com';
-    } else {
-      message.textContent = messageBox.start;
-    }
-  }
-}; // const init = () => {
-//     setTurn();
-// }
-
-
-exports.setTurn = setTurn;
+// import store from '../modules/main';
+// import {shootType, shoot2, shoot3} from './shootProbability';
+// import {userTurn, comTurn} from '../modules/index';
+// const comShootBtn = document.querySelector('#comShootBtn');
+// const userShootBtn2 = document.querySelector('#userShootBtn2');
+// const userShootBtn3 = document.querySelector('#userShootBtn3');
+// const message = document.querySelector('#message');
+// console.log(store);
+// const state = store.getState();
+// export const setTurn = () => {
+// console.log('state.count:',state.count);
+//     if (state.count !== 0) {
+//         if(state.turn === 'com') {
+//             comShootBtn.addEventListener('click', () => {
+//                 shootType();
+//                 store.dispatch(userTurn());
+//             });
+//         }else if(state.turn === 'user'){
+//             userShootBtn2.addEventListener('click', () => {
+//                 shoot2();
+//                 store.dispatch(comTurn());
+//             });
+//             userShootBtn3.addEventListener('click', () => {
+//                 shoot3();
+//                 store.dispatch(comTurn());
+//             });
+//         }else{
+//             message.textContent = state.text;
+//         };
+//     }
+// };
 },{}],"C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -191,7 +177,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49904" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
