@@ -1,3 +1,5 @@
+import store from '../index';
+import { comSCORE2, comSCORE3, userSCORE2, userSCORE3 } from '../modules/score';
 
 //com 슛
 //(1) 슛 종류 결정 확률
@@ -7,6 +9,10 @@
 // (2) 슛 종류별 성공 확률
 // - 2점 슛 성공 확률 (75%) | 3점 슛 성공 확률(35%)
 
+
+const state = store.getState();
+console.log(state.score);
+
 //2점슛 
 export const shoot2 = (event) => {
     const ShootProbability = Number((Math.random()).toFixed(2));
@@ -14,14 +20,14 @@ export const shoot2 = (event) => {
     if(ShootProbability >= 75) {
 
         //플레이어를 구분하는 삼항연산자
-        (player === 'user' ? userScore + 2 : ComScore + 2) ;
-
+        (player === 'user' ? 
+            store.dispatch(userSCORE2) : 
+            store.dispatch(comSCORE2)
+        ) ;
     }
-    gameCount.Count = gameCount.Count-1;
+    state = state.count.count - 1;
 
     console.log('2점슛');
-    console.log(board);
-
 }
 
 //3점슛 
@@ -30,11 +36,14 @@ export const shoot3 = (event) => {
     const player = event.currentTarget.name;
     if(ShootProbability <= 35) {
         //플레이어를 구분하는 삼항연산자
-        (player === 'user' ? userScore + 3 : ComScore + 3) ;
-    }
-    gameCount.Count = gameCount.Count-1;
+        (player === 'user' ? 
+            store.dispatch(userSCORE3) : 
+            store.dispatch(comSCORE3)
+        )
+    };
+
+    state = state.count.count - 1;
     console.log('3점슛');
-    console.log(board);
 }
 
 export const shootType=()=>{
@@ -45,13 +54,6 @@ export const shootType=()=>{
     //com 의 슛 종류를 결정하는 삼항연산자.
     (ShootTypeProbability >= 0.75 ? shoot2 : shoot3);
 }
-
-
-
-
-
-
-
 
 
 //user 슛
