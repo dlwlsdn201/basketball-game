@@ -1,6 +1,3 @@
-import {gameCount} from './gameCount.js';
-import {messageBox} from './start.js';
-
 
 //com 슛
 //(1) 슛 종류 결정 확률
@@ -43,7 +40,6 @@ export const shoot3 = (event) => {
 export const shootType=()=>{
     //Math.random() : 0이상 1 미만의 무작위 난수 반환
     //toFixed(n) : 반올림하여 n자리 소수점까지 나타냄
-    console.log(board);
     const ShootTypeProbability =  Number((Math.random()).toFixed(2));
 
     //com 의 슛 종류를 결정하는 삼항연산자.

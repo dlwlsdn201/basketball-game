@@ -19,7 +19,7 @@ const initialState = {
 
 //리듀서 함수 생성
 
-function setCount(state=initialState, action) {
+function count(state=initialState, action) {
     switch(action.type) {
         case COUNT10:
             return {selected: true, count: action.count};
@@ -32,4 +32,5 @@ function setCount(state=initialState, action) {
     }
 }
 
-export default setCount;
+
+export default count;

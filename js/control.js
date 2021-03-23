@@ -1,7 +1,6 @@
-import {gameCount} from './gameCount.js';
-import {board, shootType, shoot2, shoot3} from './shootProbability.js';
-import {messageBox} from './start.js';
-
+// import {gameCount} from './gameCount.js';
+// import {shootType, shoot2, shoot3} from './shootProbability.js';
+// import {messageBox} from './start.js';
 const comShootBtn = document.querySelector('#comShootBtn');
 const userShootBtn2 = document.querySelector('#userShootBtn2');
 const userShootBtn3 = document.querySelector('#userShootBtn3');

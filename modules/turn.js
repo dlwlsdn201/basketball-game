@@ -5,8 +5,8 @@ const USER = 'turn/USER';
 
 
 //액션정의함수 생성
-const com = () => ({type: COM, name: 'com'});
-const user = () => ({type: USER, name: 'user'});
+export const com = () => ({type: COM, name: 'com'});
+export const user = () => ({type: USER, name: 'user'});
 
 
 //초기값 생성
