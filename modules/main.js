@@ -6,6 +6,7 @@ const CountButtons =  document.querySelectorAll('#countBtn');
 const ShowCount = document.querySelector('#countShow');
 const startBtn = document.querySelector('#startBtn');
 const message = document.querySelector('#message');
+const resultMessage = document.querySelector('#resultMessage');
 const scoreCom = document.querySelector('.score-com');
 const scoreUser = document.querySelector('.score-user');
 const comShootBtn = document.querySelector('#comShootBtn');
@@ -30,10 +31,10 @@ const START = 'message/START';
 const COM = 'message/COM';
 const USER = 'message/USER';
 const ERROR = 'message/ERROR';
-const SUCCESS2 = 'message/SUCCESS2';
-const SUCCESS3 = 'message/SUCCESS3';
-const FAIL2 = 'message/FAIL2';
-const FAIL3 = 'message/FAIL3';
+const SUCCESS2 = 'resultMessage/SUCCESS2';
+const SUCCESS3 = 'resultMessage/SUCCESS3';
+const FAIL2 = 'resultMessage/FAIL2';
+const FAIL3 = 'resultMessage/FAIL3';
 
 // 액션정의함수 생성
 export const comSCORE3 = () => ({
@@ -66,28 +67,28 @@ export const com = () => ({
 });
 export const user = () => ({
     type: USER, 
-    text:'user 님 차례입니다',
+    text:'user 님 차례입니다.',
     turn: 'user' 
 });
 export const error = () => ({
     type: ERROR, 
     text:'게임 카운트를 먼저 선택해주세요!'  
 });
-export const success2 = () => ({
+export const success2 = (target) => ({
     type: SUCCESS2,
-    text: '2점슛 성공!!'
+    text: `${target}, 2점슛 성공!!`
 });
-export const success3 = () => ({
+export const success3 = (target) => ({
     type: SUCCESS3,
-    text: '3점슛 성공!!!!',
+    text: `${target}, 3점슛 성공!!!!`,
 });
-export const fail2 = () => ({
+export const fail2 = (target) => ({
     type: FAIL2,
-    text: '2점슛 실패...'
+    text: `${target},2점슛 실패...`
 });
-export const fail3 = () => ({
+export const fail3 = (target) => ({
     type: FAIL3,
-    text: '3점슛 실패...'
+    text: `${target}, 3점슛 실패...`
 });
 
 export const comWin = () => ({
@@ -123,6 +124,7 @@ const initialState = {
     selected : false, 
     count: null,
     turn: null,
+    resultText: '',
     text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요' ,
     ShootType: 0,
     probability: 0,
@@ -241,7 +243,7 @@ function reducer(state=initialState, action) {
             newState = Object.assign(
                 {},
                 state,
-                {text: action.text}
+                {resultText: action.text}
             );
             break;
         case SUCCESS3: 
@@ -249,7 +251,7 @@ function reducer(state=initialState, action) {
             newState = Object.assign(
                 {},
                 state,
-                {text: action.text}
+                {resultText: action.text}
             );
             break;
         case FAIL2: 
@@ -257,7 +259,7 @@ function reducer(state=initialState, action) {
             newState = Object.assign(
                 {},
                 state,
-                {text: action.text}
+                {resultText: action.text}
             );
             break;
         case FAIL3: 
@@ -265,7 +267,7 @@ function reducer(state=initialState, action) {
             newState = Object.assign(
                 {},
                 state,
-                {text: action.text}
+                {resultText: action.text}
             );
             break;
         case SUCCESS_OR_FALSE2: 
@@ -305,12 +307,13 @@ const compare =() => {
 
 const render = () => {
     const state =store.getState();
-    console.log('카운트:',state.count)
+    console.log('카운트:',state.count);
     if(state.count > 0){
         ShowCount.textContent = state.count;
         message.textContent = state.text;
         scoreCom.textContent = state.comScore;
         scoreUser.textContent = state.userScore;
+        resultMessage.textContent = state.resultText;
         if(state.turn === 'com'){
             userShootBtn2.classList.add('off');
             userShootBtn3.classList.add('off');
@@ -323,75 +326,109 @@ const render = () => {
     }else if(state.count === 0){
         ShowCount.textContent = state.count;
         message.textContent = state.text;
+        userShootBtn2.classList.add('off');
+        userShootBtn3.classList.add('off');
         console.log('게임 종료');
         compare();
     }else{
         message.textContent = state.text;
+        comShootBtn.classList.add('off');
+        userShootBtn2.classList.add('off');
+        userShootBtn3.classList.add('off');
     }
 };
 
 render();
 store.subscribe(render);
 
-CountButtons[0].onclick = () => store.dispatch(count10());
-CountButtons[1].onclick = () => store.dispatch(count20());
-CountButtons[2].onclick = () => store.dispatch(count30());
+CountButtons[0].onclick = () => {
+    resultMessage.style.visibility = "hidden";
+    store.dispatch(count10());
+}
+CountButtons[1].onclick = () => {
+    resultMessage.style.visibility = "hidden";
+    store.dispatch(count20());
+}
+CountButtons[2].onclick = () => {
+    resultMessage.style.visibility = "hidden";
+    store.dispatch(count30());
+}
 
 startBtn.onclick = () => {
     const state = store.getState();
     state.selected ? store.dispatch(start()) : store.dispatch(error());
-}
+};
 
-comShootBtn.onclick = () => {
+comShootBtn.onclick = (event) => {
     const state =store.getState();
-    const Probability = Number((Math.random()).toFixed(2));
-    if(Probability <= 0.75){
-        console.log('2점 슛');
+    let TARGET = state.turn;
+    if(state.count === 0 || TARGET === 'user'){
+        event.preventDefault();
+    }else{
+        resultMessage.style.visibility = "visible";
+        const Probability = Number((Math.random()).toFixed(2));
+        if(Probability <= 0.75){
+            console.log('2점 슛');
+            store.dispatch(successOrfalse2());
+            if(state.probability <= 0.85){
+                store.dispatch(success2(TARGET));
+                store.dispatch(comSCORE2())
+            }else {
+                store.dispatch(fail2(TARGET));
+            }
+                
+        }else{
+            console.log('3점 슛');
+            store.dispatch(successOrfalse3())
+            if(state.probability <= 0.45){
+                store.dispatch(success3(TARGET));
+                store.dispatch(comSCORE3())
+            }else {
+                store.dispatch(fail3(TARGET));
+            }
+        }
+        store.dispatch(user());
+        store.dispatch(remainCount());
+    }
+};
+
+userShootBtn2.onclick = (event) => {
+    const state = store.getState();
+    let TARGET = state.turn;
+    if(state.count === 0 || TARGET === 'com'){
+        event.preventDefault();
+    }else{
+        resultMessage.style.visibility = "visible";
+        console.log('user 2점 슛');
         store.dispatch(successOrfalse2());
         if(state.probability <= 0.85){
-            store.dispatch(success2());
-            store.dispatch(comSCORE2())
+            store.dispatch(success2(TARGET));
+            store.dispatch(userSCORE2())
         }else {
-            store.dispatch(fail2());
+            store.dispatch(fail2(TARGET));
         }
-            
+        store.dispatch(com());
+        store.dispatch(remainCount());
+    }
+};
+
+userShootBtn3.onclick = (event) => {
+    const state = store.getState();
+    let TARGET = state.turn;
+    if(state.count === 0 || TARGET === 'com'){
+        event.preventDefault();
     }else{
-        console.log('3점 슛');
+        resultMessage.style.visibility = "visible";
         store.dispatch(successOrfalse3())
         if(state.probability <= 0.45){
-            store.dispatch(success3());
-            store.dispatch(comSCORE3())
+            store.dispatch(success3(TARGET));
+            store.dispatch(userSCORE3())
         }else {
-            store.dispatch(fail3());
+            store.dispatch(fail3(TARGET));
         }
+        store.dispatch(com());
+        store.dispatch(remainCount());
     }
-    store.dispatch(user());
-    store.dispatch(remainCount());
-} 
-userShootBtn2.onclick = () => {
-    const state = store.getState();
-    console.log('2점 슛');
-    store.dispatch(successOrfalse2());
-    if(state.probability <= 0.85){
-        store.dispatch(success2());
-        store.dispatch(userSCORE2())
-    }else {
-        store.dispatch(fail2());
-    }
-    store.dispatch(com());
-    store.dispatch(remainCount());
-};
-userShootBtn3.onclick = () => {
-    const state = store.getState();
-    store.dispatch(successOrfalse3())
-    if(state.probability <= 0.45){
-        store.dispatch(success3());
-        store.dispatch(userSCORE3())
-    }else {
-        store.dispatch(fail3());
-    }
-    store.dispatch(com());
-    store.dispatch(remainCount());
 };
 
 

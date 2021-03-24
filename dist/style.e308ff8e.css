@@ -150,6 +150,11 @@ hr {
   width: 4.5rem;
 }
 
+.container .scoreBoard-wrapper .resultMessage {
+  visibility: hidden;
+  height: 1rem;
+}
+
 .container .scoreBoard-wrapper input {
   height: 3rem;
   width: 4rem;
@@ -185,7 +190,7 @@ hr {
 }
 
 .container .control-wrapper .off:hover {
-  cursor: auto;
+  cursor: not-allowed;
   background: #888888a8;
 }
 

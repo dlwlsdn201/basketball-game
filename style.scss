@@ -106,8 +106,13 @@ hr{
                 width: 4.5rem;
             }
 
+            
         }
-
+        
+        .resultMessage{
+            visibility: hidden;
+            height: 1rem;
+        }
         input {
             height: 3rem;
             width: 4rem;
@@ -140,7 +145,7 @@ hr{
 
         .off {
             &:hover{
-                cursor: auto;
+                cursor: not-allowed;
                 background: #888888a8;
             }
         }

@@ -895,6 +895,7 @@ var CountButtons = document.querySelectorAll('#countBtn');
 var ShowCount = document.querySelector('#countShow');
 var startBtn = document.querySelector('#startBtn');
 var message = document.querySelector('#message');
+var resultMessage = document.querySelector('#resultMessage');
 var scoreCom = document.querySelector('.score-com');
 var scoreUser = document.querySelector('.score-user');
 var comShootBtn = document.querySelector('#comShootBtn');
@@ -915,10 +916,10 @@ var START = 'message/START';
 var COM = 'message/COM';
 var USER = 'message/USER';
 var ERROR = 'message/ERROR';
-var SUCCESS2 = 'message/SUCCESS2';
-var SUCCESS3 = 'message/SUCCESS3';
-var FAIL2 = 'message/FAIL2';
-var FAIL3 = 'message/FAIL3'; // 액션정의함수 생성
+var SUCCESS2 = 'resultMessage/SUCCESS2';
+var SUCCESS3 = 'resultMessage/SUCCESS3';
+var FAIL2 = 'resultMessage/FAIL2';
+var FAIL3 = 'resultMessage/FAIL3'; // 액션정의함수 생성
 
 var comSCORE3 = function comSCORE3() {
   return {
@@ -1010,7 +1011,7 @@ exports.com = com;
 var user = function user() {
   return {
     type: USER,
-    text: 'user 님 차례입니다',
+    text: 'user 님 차례입니다.',
     turn: 'user'
   };
 };
@@ -1026,37 +1027,37 @@ var error = function error() {
 
 exports.error = error;
 
-var success2 = function success2() {
+var success2 = function success2(target) {
   return {
     type: SUCCESS2,
-    text: '2점슛 성공!!'
+    text: "".concat(target, ", 2\uC810\uC29B \uC131\uACF5!!")
   };
 };
 
 exports.success2 = success2;
 
-var success3 = function success3() {
+var success3 = function success3(target) {
   return {
     type: SUCCESS3,
-    text: '3점슛 성공!!!!'
+    text: "".concat(target, ", 3\uC810\uC29B \uC131\uACF5!!!!")
   };
 };
 
 exports.success3 = success3;
 
-var fail2 = function fail2() {
+var fail2 = function fail2(target) {
   return {
     type: FAIL2,
-    text: '2점슛 실패...'
+    text: "".concat(target, ",2\uC810\uC29B \uC2E4\uD328...")
   };
 };
 
 exports.fail2 = fail2;
 
-var fail3 = function fail3() {
+var fail3 = function fail3(target) {
   return {
     type: FAIL3,
-    text: '3점슛 실패...'
+    text: "".concat(target, ", 3\uC810\uC29B \uC2E4\uD328...")
   };
 };
 
@@ -1113,6 +1114,7 @@ var initialState = {
   selected: false,
   count: null,
   turn: null,
+  resultText: '',
   text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요',
   ShootType: 0,
   probability: 0
@@ -1225,28 +1227,28 @@ function reducer() {
     case SUCCESS2:
       // return {...state,text : action.text};
       newState = Object.assign({}, state, {
-        text: action.text
+        resultText: action.text
       });
       break;
 
     case SUCCESS3:
       // return {...state,text : action.text};
       newState = Object.assign({}, state, {
-        text: action.text
+        resultText: action.text
       });
       break;
 
     case FAIL2:
       // return {...state,text : action.text};
       newState = Object.assign({}, state, {
-        text: action.text
+        resultText: action.text
       });
       break;
 
     case FAIL3:
       // return {...state,text : action.text};
       newState = Object.assign({}, state, {
-        text: action.text
+        resultText: action.text
       });
       break;
 
@@ -1296,6 +1298,7 @@ var render = function render() {
     message.textContent = state.text;
     scoreCom.textContent = state.comScore;
     scoreUser.textContent = state.userScore;
+    resultMessage.textContent = state.resultText;
 
     if (state.turn === 'com') {
       userShootBtn2.classList.add('off');
@@ -1311,10 +1314,15 @@ var render = function render() {
   } else if (state.count === 0) {
     ShowCount.textContent = state.count;
     message.textContent = state.text;
+    userShootBtn2.classList.add('off');
+    userShootBtn3.classList.add('off');
     console.log('게임 종료');
     compare();
   } else {
     message.textContent = state.text;
+    comShootBtn.classList.add('off');
+    userShootBtn2.classList.add('off');
+    userShootBtn3.classList.add('off');
   }
 };
 
@@ -1322,15 +1330,18 @@ render();
 store.subscribe(render);
 
 CountButtons[0].onclick = function () {
-  return store.dispatch(count10());
+  resultMessage.style.visibility = "hidden";
+  store.dispatch(count10());
 };
 
 CountButtons[1].onclick = function () {
-  return store.dispatch(count20());
+  resultMessage.style.visibility = "hidden";
+  store.dispatch(count20());
 };
 
 CountButtons[2].onclick = function () {
-  return store.dispatch(count30());
+  resultMessage.style.visibility = "hidden";
+  store.dispatch(count30());
 };
 
 startBtn.onclick = function () {
@@ -1338,65 +1349,86 @@ startBtn.onclick = function () {
   state.selected ? store.dispatch(start()) : store.dispatch(error());
 };
 
-comShootBtn.onclick = function () {
+comShootBtn.onclick = function (event) {
   var state = store.getState();
-  var Probability = Number(Math.random().toFixed(2));
+  var TARGET = state.turn;
 
-  if (Probability <= 0.75) {
-    console.log('2점 슛');
+  if (state.count === 0 || TARGET === 'user') {
+    event.preventDefault();
+  } else {
+    resultMessage.style.visibility = "visible";
+    var Probability = Number(Math.random().toFixed(2));
+
+    if (Probability <= 0.75) {
+      console.log('2점 슛');
+      store.dispatch(successOrfalse2());
+
+      if (state.probability <= 0.85) {
+        store.dispatch(success2(TARGET));
+        store.dispatch(comSCORE2());
+      } else {
+        store.dispatch(fail2(TARGET));
+      }
+    } else {
+      console.log('3점 슛');
+      store.dispatch(successOrfalse3());
+
+      if (state.probability <= 0.45) {
+        store.dispatch(success3(TARGET));
+        store.dispatch(comSCORE3());
+      } else {
+        store.dispatch(fail3(TARGET));
+      }
+    }
+
+    store.dispatch(user());
+    store.dispatch(remainCount());
+  }
+};
+
+userShootBtn2.onclick = function (event) {
+  var state = store.getState();
+  var TARGET = state.turn;
+
+  if (state.count === 0 || TARGET === 'com') {
+    event.preventDefault();
+  } else {
+    resultMessage.style.visibility = "visible";
+    console.log('user 2점 슛');
     store.dispatch(successOrfalse2());
 
     if (state.probability <= 0.85) {
-      store.dispatch(success2());
-      store.dispatch(comSCORE2());
+      store.dispatch(success2(TARGET));
+      store.dispatch(userSCORE2());
     } else {
-      store.dispatch(fail2());
+      store.dispatch(fail2(TARGET));
     }
+
+    store.dispatch(com());
+    store.dispatch(remainCount());
+  }
+};
+
+userShootBtn3.onclick = function (event) {
+  var state = store.getState();
+  var TARGET = state.turn;
+
+  if (state.count === 0 || TARGET === 'com') {
+    event.preventDefault();
   } else {
-    console.log('3점 슛');
+    resultMessage.style.visibility = "visible";
     store.dispatch(successOrfalse3());
 
     if (state.probability <= 0.45) {
-      store.dispatch(success3());
-      store.dispatch(comSCORE3());
+      store.dispatch(success3(TARGET));
+      store.dispatch(userSCORE3());
     } else {
-      store.dispatch(fail3());
+      store.dispatch(fail3(TARGET));
     }
+
+    store.dispatch(com());
+    store.dispatch(remainCount());
   }
-
-  store.dispatch(user());
-  store.dispatch(remainCount());
-};
-
-userShootBtn2.onclick = function () {
-  var state = store.getState();
-  console.log('2점 슛');
-  store.dispatch(successOrfalse2());
-
-  if (state.probability <= 0.85) {
-    store.dispatch(success2());
-    store.dispatch(userSCORE2());
-  } else {
-    store.dispatch(fail2());
-  }
-
-  store.dispatch(com());
-  store.dispatch(remainCount());
-};
-
-userShootBtn3.onclick = function () {
-  var state = store.getState();
-  store.dispatch(successOrfalse3());
-
-  if (state.probability <= 0.45) {
-    store.dispatch(success3());
-    store.dispatch(userSCORE3());
-  } else {
-    store.dispatch(fail3());
-  }
-
-  store.dispatch(com());
-  store.dispatch(remainCount());
 };
 
 var _default = store;
