@@ -885,7 +885,7 @@ exports.devToolsEnhancer =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.successOrfalse3 = exports.successOrfalse2 = exports.fail3 = exports.fail2 = exports.success3 = exports.success2 = exports.error = exports.user = exports.com = exports.start = exports.remainCount = exports.count30 = exports.count20 = exports.count10 = exports.userSCORE3 = exports.userSCORE2 = exports.comSCORE2 = exports.comSCORE3 = void 0;
+exports.default = exports.successOrfalse3 = exports.successOrfalse2 = exports.draw = exports.userWin = exports.comWin = exports.fail3 = exports.fail2 = exports.success3 = exports.success2 = exports.error = exports.user = exports.com = exports.start = exports.remainCount = exports.count30 = exports.count20 = exports.count10 = exports.userSCORE3 = exports.userSCORE2 = exports.comSCORE2 = exports.comSCORE3 = void 0;
 
 var _redux = require("redux");
 
@@ -1062,6 +1062,33 @@ var fail3 = function fail3() {
 
 exports.fail3 = fail3;
 
+var comWin = function comWin() {
+  return {
+    type: COM_WIN,
+    text: 'com이 승리하였습니다!'
+  };
+};
+
+exports.comWin = comWin;
+
+var userWin = function userWin() {
+  return {
+    type: USER_WIN,
+    text: '사용자 님이 승리하였습니다!!'
+  };
+};
+
+exports.userWin = userWin;
+
+var draw = function draw() {
+  return {
+    type: DRAW,
+    text: '무승부입니다.'
+  };
+};
+
+exports.draw = draw;
+
 var successOrfalse2 = function successOrfalse2() {
   return {
     type: SUCCESS_OR_FALSE2,
@@ -1084,7 +1111,7 @@ var initialState = {
   userScore: 0,
   comScore: 0,
   selected: false,
-  count: 0,
+  count: null,
   turn: null,
   text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요',
   ShootType: 0,
@@ -1246,45 +1273,48 @@ function reducer() {
 ;
 var store = (0, _redux.createStore)(reducer, (0, _reduxDevtoolsExtension.composeWithDevTools)());
 
-var setTurn = function setTurn() {
+var compare = function compare() {
   var state = store.getState();
 
-  if (state.count !== 0) {
+  if (state.comScore > state.userScore) {
+    message.textContent = 'com 승리!';
+  } else if (state.comScore < state.userScore) {
+    message.textContent = '유저 승리!';
+  } else {
+    message.textContent = '무승부';
+  }
+
+  ;
+};
+
+var render = function render() {
+  var state = store.getState();
+  console.log('카운트:', state.count);
+
+  if (state.count > 0) {
+    ShowCount.textContent = state.count;
+    message.textContent = state.text;
+    scoreCom.textContent = state.comScore;
+    scoreUser.textContent = state.userScore;
+
     if (state.turn === 'com') {
       userShootBtn2.classList.add('off');
       userShootBtn3.classList.add('off');
       comShootBtn.classList.remove('off');
-    } else if (state.turn === 'user') {
-      comShootBtn.classList.add('off');
-      userShootBtn2.classList.remove('on');
-      userShootBtn3.classList.remove('on');
-    } else {
-      message.textContent = state.text;
     }
-  }
-};
 
-setTurn();
-store.subscribe(setTurn);
-
-var render = function render() {
-  var state = store.getState();
-  ShowCount.textContent = state.count;
-  console.log('여기', state.turn === 'user');
-  message.textContent = state.text;
-  scoreCom.textContent = state.comScore;
-  scoreUser.textContent = state.userScore;
-
-  if (state.turn === 'com') {
-    userShootBtn2.classList.add('off');
-    userShootBtn3.classList.add('off');
-    comShootBtn.classList.remove('off');
-  }
-
-  if (state.turn === 'user') {
-    comShootBtn.classList.add('off');
-    userShootBtn2.classList.remove('off');
-    userShootBtn3.classList.remove('off');
+    if (state.turn === 'user') {
+      comShootBtn.classList.add('off');
+      userShootBtn2.classList.remove('off');
+      userShootBtn3.classList.remove('off');
+    }
+  } else if (state.count === 0) {
+    ShowCount.textContent = state.count;
+    message.textContent = state.text;
+    console.log('게임 종료');
+    compare();
+  } else {
+    return false;
   }
 };
 
@@ -1311,12 +1341,10 @@ startBtn.onclick = function () {
 comShootBtn.onclick = function () {
   var state = store.getState();
   var Probability = Number(Math.random().toFixed(2));
-  console.log('Probability:', Probability);
 
   if (Probability <= 0.75) {
     console.log('2점 슛');
     store.dispatch(successOrfalse2());
-    console.log(state.probability);
 
     if (state.probability > 0.25) {
       store.dispatch(success2());
@@ -1401,7 +1429,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49904" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50534" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

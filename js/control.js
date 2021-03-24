@@ -6,30 +6,33 @@
 // const userShootBtn3 = document.querySelector('#userShootBtn3');
 // const message = document.querySelector('#message');
 
-// console.log(store);
+
 // const state = store.getState();
 
 
 // export const setTurn = () => {
-// console.log('state.count:',state.count);
+//     console.log('state.count:',state.count);
 //     if (state.count !== 0) {
 //         if(state.turn === 'com') {
-//             comShootBtn.addEventListener('click', () => {
-//                 shootType();
+//                 userShootBtn2.classList.add('off');
+//                 userShootBtn3.classList.add('off');
+//                 comShootBtn.classList.remove('off');
+//                 message.textContent = state.com;
+//                 comShootBtn.addEventListener('click', shootType);
 //                 store.dispatch(userTurn());
-//             });
 //         }else if(state.turn === 'user'){
-//             userShootBtn2.addEventListener('click', () => {
-//                 shoot2();
+//                 comShootBtn.classList.add('off');
+//                 userShootBtn2.classList.remove('on');
+//                 userShootBtn3.classList.remove('on');
+//                 message.textContent = state.user;
+//                 userShootBtn2.addEventListener('click', shoot2);
+//                 userShootBtn3.addEventListener('click', shoot3);
 //                 store.dispatch(comTurn());
-
-//             });
-//             userShootBtn3.addEventListener('click', () => {
-//                 shoot3();
-//                 store.dispatch(comTurn());
-//             });
 //         }else{
 //             message.textContent = state.text;
-//         };
+//         }
 //     }
 // };
+
+// setTurn();
+// store.subscribe(setTurn);

@@ -90,6 +90,20 @@ export const fail3 = () => ({
     text: '3점슛 실패...'
 });
 
+export const comWin = () => ({
+    type: COM_WIN,
+    text: 'com이 승리하였습니다!',
+});
+
+export const userWin = () => ({
+    type: USER_WIN,
+    text: '사용자 님이 승리하였습니다!!'
+});
+
+export const draw = () => ({
+    type: DRAW,
+    text: '무승부입니다.'
+});
 
 
 export const successOrfalse2 = () => ({
@@ -107,11 +121,11 @@ const initialState = {
     userScore : 0,
     comScore : 0,
     selected : false, 
-    count: 0,
+    count: null,
     turn: null,
     text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요' ,
     ShootType: 0,
-    probability: 0
+    probability: 0,
 };
 
 //리듀서 함수 생성
@@ -277,46 +291,44 @@ function reducer(state=initialState, action) {
 
 const store = createStore(reducer, composeWithDevTools());
 
-const setTurn = () => {
-    const state =store.getState();
-    if (state.count !== 0) {
-        if(state.turn === 'com') {
-                userShootBtn2.classList.add('off');
-                userShootBtn3.classList.add('off');
-                comShootBtn.classList.remove('off');
-                
-        }else if(state.turn === 'user'){
-                comShootBtn.classList.add('off');
-                userShootBtn2.classList.remove('on');
-                userShootBtn3.classList.remove('on');
-                
-        }else{
-            message.textContent = state.text;
-        }
-    }
+const compare =() => {
+    const state = store.getState();
+    if (state.comScore > state.userScore){
+        message.textContent = 'com 승리!';
+    }else if (state.comScore < state.userScore){
+        message.textContent = '유저 승리!';
+    }else{ 
+        message.textContent = '무승부';
+    };
 }
-setTurn();
-store.subscribe(setTurn);
 
 
 const render = () => {
     const state =store.getState();
-    ShowCount.textContent = state.count;
-    console.log('여기',state.turn === 'user');
-    message.textContent = state.text;
-    scoreCom.textContent = state.comScore;
-    scoreUser.textContent = state.userScore;
-    if(state.turn === 'com'){
-        userShootBtn2.classList.add('off');
-        userShootBtn3.classList.add('off');
-        comShootBtn.classList.remove('off');
-    }if(state.turn === 'user'){
-        comShootBtn.classList.add('off');
-        userShootBtn2.classList.remove('off');
-        userShootBtn3.classList.remove('off');
+    console.log('카운트:',state.count)
+    if(state.count > 0){
+        ShowCount.textContent = state.count;
+        message.textContent = state.text;
+        scoreCom.textContent = state.comScore;
+        scoreUser.textContent = state.userScore;
+        if(state.turn === 'com'){
+            userShootBtn2.classList.add('off');
+            userShootBtn3.classList.add('off');
+            comShootBtn.classList.remove('off');
+        }if(state.turn === 'user'){
+            comShootBtn.classList.add('off');
+            userShootBtn2.classList.remove('off');
+            userShootBtn3.classList.remove('off');
+        }
+    }else if(state.count === 0){
+        ShowCount.textContent = state.count;
+        message.textContent = state.text;
+        console.log('게임 종료');
+        compare();
+    }else{
+        return false;
     }
-
-}
+};
 
 render();
 store.subscribe(render);
@@ -330,15 +342,12 @@ startBtn.onclick = () => {
     state.selected ? store.dispatch(start()) : store.dispatch(error());
 }
 
-
 comShootBtn.onclick = () => {
     const state =store.getState();
     const Probability = Number((Math.random()).toFixed(2));
-    console.log('Probability:', Probability);
     if(Probability <= 0.75){
         console.log('2점 슛');
         store.dispatch(successOrfalse2());
-        console.log(state.probability);
         if(state.probability > 0.25){
             store.dispatch(success2());
             store.dispatch(comSCORE2())
@@ -371,8 +380,7 @@ userShootBtn2.onclick = () => {
     }
     store.dispatch(com());
     store.dispatch(remainCount());
-    };
-
+};
 userShootBtn3.onclick = () => {
     const state = store.getState();
     store.dispatch(successOrfalse3())
@@ -385,5 +393,7 @@ userShootBtn3.onclick = () => {
     store.dispatch(com());
     store.dispatch(remainCount());
 };
+
+
 
 export default store;
