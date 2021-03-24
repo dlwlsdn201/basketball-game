@@ -326,7 +326,7 @@ const render = () => {
         console.log('게임 종료');
         compare();
     }else{
-        return false;
+        message.textContent = state.text;
     }
 };
 
@@ -348,7 +348,7 @@ comShootBtn.onclick = () => {
     if(Probability <= 0.75){
         console.log('2점 슛');
         store.dispatch(successOrfalse2());
-        if(state.probability > 0.15){
+        if(state.probability <= 0.85){
             store.dispatch(success2());
             store.dispatch(comSCORE2())
         }else {
@@ -372,7 +372,7 @@ userShootBtn2.onclick = () => {
     const state = store.getState();
     console.log('2점 슛');
     store.dispatch(successOrfalse2());
-    if(state.probability > 0.15){
+    if(state.probability <= 0.85){
         store.dispatch(success2());
         store.dispatch(userSCORE2())
     }else {
