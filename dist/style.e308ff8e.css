@@ -185,7 +185,7 @@ hr {
 }
 
 .container .control-wrapper .off:hover {
-  cursor: not-allowed;
+  cursor: auto;
   background: #888888a8;
 }
 
