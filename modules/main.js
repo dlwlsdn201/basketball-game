@@ -348,7 +348,7 @@ comShootBtn.onclick = () => {
     if(Probability <= 0.75){
         console.log('2점 슛');
         store.dispatch(successOrfalse2());
-        if(state.probability > 0.25){
+        if(state.probability > 0.15){
             store.dispatch(success2());
             store.dispatch(comSCORE2())
         }else {
@@ -358,7 +358,7 @@ comShootBtn.onclick = () => {
     }else{
         console.log('3점 슛');
         store.dispatch(successOrfalse3())
-        if(state.probability <= 0.35){
+        if(state.probability <= 0.45){
             store.dispatch(success3());
             store.dispatch(comSCORE3())
         }else {
@@ -372,7 +372,7 @@ userShootBtn2.onclick = () => {
     const state = store.getState();
     console.log('2점 슛');
     store.dispatch(successOrfalse2());
-    if(state.probability > 0.25){
+    if(state.probability > 0.15){
         store.dispatch(success2());
         store.dispatch(userSCORE2())
     }else {
@@ -384,7 +384,7 @@ userShootBtn2.onclick = () => {
 userShootBtn3.onclick = () => {
     const state = store.getState();
     store.dispatch(successOrfalse3())
-    if(state.probability <= 0.35){
+    if(state.probability <= 0.45){
         store.dispatch(success3());
         store.dispatch(userSCORE3())
     }else {
