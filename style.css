@@ -20,7 +20,6 @@ hr {
   width: 100%;
   padding: 0;
   margin: 0;
-  margin-top: 5%;
 }
 
 .container {
@@ -186,6 +185,7 @@ hr {
 .container .scoreBoard-wrapper .message {
   color: #F2D5D5;
   font-size: 1.2rem;
+  margin-top: 0;
 }
 
 .container .control-wrapper {
@@ -196,7 +196,7 @@ hr {
           align-items: center;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 5% 0;
+  padding: 3% 0;
   height: 30%;
   background-color: #49794b83;
 }
@@ -231,10 +231,10 @@ hr {
   background: #888888a8;
 }
 
-@media screen and (max-width: 381px) {
+@media screen and (max-width: 424px) {
   .container .title-wrapper .title {
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .container .control-wrapper {
     -webkit-box-pack: justify;
@@ -263,9 +263,13 @@ hr {
   .container .control-wrapper .button-block input:nth-child(2) {
     margin-left: 0.1rem;
   }
+  .container .message {
+    text-align: center;
+    width: 16rem;
+  }
 }
 
-@media screen and (min-width: 381px) and (max-width: 580px) {
+@media screen and (min-width: 425px) and (max-width: 580px) {
   .container .title-wrapper .title {
     font-size: 1.8rem;
     font-weight: bolder;
@@ -277,12 +281,9 @@ hr {
   .container .count-wrapper .countResult-block {
     font-size: 1.2rem;
   }
-}
-
-@media screen and (max-width: 387px) {
   .container .message {
     text-align: center;
-    width: 13rem;
+    width: 16rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

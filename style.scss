@@ -29,7 +29,6 @@ hr{
     width: 100%;
     padding: 0;
     margin: 0;
-    margin-top : 5%;
 }
 
 .container {
@@ -149,6 +148,7 @@ hr{
         .message {
             color: $textDefault;
             font-size: 1.2rem;
+            margin-top: 0;
         }
     }
 
@@ -156,7 +156,7 @@ hr{
         justify-content: space-around;
         align-items: center;
         box-sizing: border-box;
-        padding: 5% 0;
+        padding: 3% 0;
         height: 30%;
         background-color: $wrapper;
 
@@ -185,11 +185,11 @@ hr{
         }
     }
 
-    @media screen and (max-width: 381px){
+    @media screen and (max-width: 424px){
         .title-wrapper {
             .title {
                 font-weight: 700;
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
         }
 
@@ -217,9 +217,14 @@ hr{
                 }
             }
         }
+
+        .message{
+            text-align: center;
+            width: 16rem;
+        }
     }
 
-    @media screen and (min-width:381px) and (max-width:580px){
+    @media screen and (min-width:425px) and (max-width:580px){
     
         .title-wrapper {
             .title {
@@ -239,15 +244,10 @@ hr{
                 font-size: 1.2rem;
             }
         }
-    
-    }
 
-
-
-    @media screen and (max-width: 387px){
         .message{
             text-align: center;
-            width: 13rem;
+            width: 16rem;
         }
     }
 }
