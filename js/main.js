@@ -134,7 +134,6 @@ const initialState = {
 
 //리듀서 함수 생성
 function reducer(state=initialState, action) {
-    // console.log(action.type);
     let newState;
     switch(action.type) {
         case COM_SCORE2:
@@ -286,7 +285,6 @@ const compare =() => {
 
 const render = () => {
     const state =store.getState();
-    console.log('카운트:',state.currentCount);
     if(state.currentCount > 0){
         ShowCount.textContent = state.currentCount;
         message.textContent = state.text;
@@ -307,7 +305,6 @@ const render = () => {
         message.textContent = state.text;
         userShootBtn2.classList.add('off');
         userShootBtn3.classList.add('off');
-        console.log('게임 종료');
         compare();
     }else{
         message.textContent = state.text;
@@ -348,7 +345,6 @@ comShootBtn.onclick = (event) => {
         resultMessage.style.visibility = "visible";
         const Probability = Number((Math.random()).toFixed(2));
         if(Probability <= 0.75){
-            console.log('2점 슛');
             store.dispatch(successOrfalse2());
             if(state.probability <= 0.85){
                 store.dispatch(success2(TARGET));
@@ -358,7 +354,6 @@ comShootBtn.onclick = (event) => {
             }
                 
         }else{
-            console.log('3점 슛');
             store.dispatch(successOrfalse3())
             if(state.probability <= 0.45){
                 store.dispatch(success3(TARGET));
@@ -379,7 +374,6 @@ userShootBtn2.onclick = (event) => {
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
-        console.log('user 2점 슛');
         store.dispatch(successOrfalse2());
         if(state.probability <= 0.85){
             store.dispatch(success2(TARGET));

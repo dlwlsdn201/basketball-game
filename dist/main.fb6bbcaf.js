@@ -1128,7 +1128,6 @@ var initialState = {
 function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // console.log(action.type);
   var newState;
 
   switch (action.type) {
@@ -1277,7 +1276,6 @@ var compare = function compare() {
 
 var render = function render() {
   var state = store.getState();
-  console.log('카운트:', state.currentCount);
 
   if (state.currentCount > 0) {
     ShowCount.textContent = state.currentCount;
@@ -1302,7 +1300,6 @@ var render = function render() {
     message.textContent = state.text;
     userShootBtn2.classList.add('off');
     userShootBtn3.classList.add('off');
-    console.log('게임 종료');
     compare();
   } else {
     message.textContent = state.text;
@@ -1347,7 +1344,6 @@ comShootBtn.onclick = function (event) {
     var Probability = Number(Math.random().toFixed(2));
 
     if (Probability <= 0.75) {
-      console.log('2점 슛');
       store.dispatch(successOrfalse2());
 
       if (state.probability <= 0.85) {
@@ -1357,7 +1353,6 @@ comShootBtn.onclick = function (event) {
         store.dispatch(fail2(TARGET));
       }
     } else {
-      console.log('3점 슛');
       store.dispatch(successOrfalse3());
 
       if (state.probability <= 0.45) {
@@ -1381,7 +1376,6 @@ userShootBtn2.onclick = function (event) {
     event.preventDefault();
   } else {
     resultMessage.style.visibility = "visible";
-    console.log('user 2점 슛');
     store.dispatch(successOrfalse2());
 
     if (state.probability <= 0.85) {
