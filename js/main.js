@@ -50,15 +50,16 @@ export const userSCORE3 = () => ({
     type : USER_SCORE3
 });
 
-export const count10 = () => ({type: COUNT10, count: 10});
-export const count20 = () => ({type: COUNT20, count: 20});
-export const count30 = () => ({type: COUNT30, count: 30});
+export const count10 = () => ({type: COUNT10, selectedCount: 10, currentCount: 10});
+export const count20 = () => ({type: COUNT20, selectedCount: 20, currentCount: 20});
+export const count30 = () => ({type: COUNT30, selectedCount: 30, currentCount: 30});
 export const remainCount = () => ({type: REMAIN_COUNT});
 
-export const start = () => ({
+export const start = (initialCount) => ({
     type: START, 
     text:'com 먼저 시작합니다.', 
-    turn: 'com'
+    turn: 'com',
+    currentCount: initialCount
 });
 export const com = () => ({
     type: COM, 
@@ -122,7 +123,8 @@ const initialState = {
     userScore : 0,
     comScore : 0,
     selected : false, 
-    count: null,
+    selectedCount: null,
+    currentCount: null,
     turn: null,
     resultText: '',
     text: '상단에 카운트를 설정하신 후 Start 버튼을 눌러주세요' ,
@@ -136,9 +138,6 @@ function reducer(state=initialState, action) {
     let newState;
     switch(action.type) {
         case COM_SCORE2:
-            // return {...state, 
-            //         comScore: state.comScore + 2,
-            //         };
             newState = Object.assign(
                 {},
                 state,
@@ -146,9 +145,6 @@ function reducer(state=initialState, action) {
             ;
             break;
         case COM_SCORE3 :
-            // return { ...state,
-            //         comScore: state.comScore + 3,
-            //         };
             newState = Object.assign(
                 {},
                 state,
@@ -156,9 +152,6 @@ function reducer(state=initialState, action) {
             ;
             break;
         case USER_SCORE2 :
-            // return { ...state,
-            //         userScore: state.userScore + 2,
-            //         };
             newState = Object.assign(
                 {},
                 state,
@@ -166,9 +159,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case USER_SCORE3 :
-            // return { ...state,
-            //         userScore: state.userScore + 3,
-            //         };
             newState = Object.assign(
                 {},
                 state,
@@ -176,46 +166,41 @@ function reducer(state=initialState, action) {
             );
             break;
         case COUNT10:
-            // return {...state,selected: true, count: action.count};
             newState = Object.assign(
                 {}, 
                 state, 
-                {selected: true, count: action.count}
+                {selected: true, selectedCount: action.selectedCount, currentCount: action.currentCount}
             );
             break;
         case COUNT20:
-            // return {...state,selected: true, count: action.count};
             newState = Object.assign(
                 {}, 
                 state, 
-                {selected: true, count: action.count}
+                {selected: true, selectedCount: action.selectedCount, currentCount: action.currentCount}
             );
             break;
         case COUNT30:
-            // return {...state,selected: true, count: action.count};
             newState = Object.assign(
                 {}, 
                 state, 
-                {selected: true, count: action.count}
+                {selected: true, selectedCount: action.selectedCount, currentCount: action.currentCount}
             );
             break;
         case REMAIN_COUNT:
         newState = Object.assign(
             {}, 
             state, 
-            {count: state.count - 1 }
+            {currentCount: state.currentCount - 1 }
         );
         break;
         case START: 
-            // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
-                {text: action.text, turn: action.turn}
+                {text: action.text, currentCount: state.selectedCount, turn: action.turn}
             );
             break;
         case COM: 
-            // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -223,7 +208,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case USER: 
-            // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -231,7 +215,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case ERROR: 
-            // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -239,7 +222,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case SUCCESS2: 
-        // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -247,7 +229,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case SUCCESS3: 
-        // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -263,7 +244,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case FAIL3: 
-        // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -271,7 +251,6 @@ function reducer(state=initialState, action) {
             );
             break;
         case SUCCESS_OR_FALSE2: 
-    // return {...state,text : action.text};
             newState = Object.assign(
                 {},
                 state,
@@ -307,9 +286,9 @@ const compare =() => {
 
 const render = () => {
     const state =store.getState();
-    console.log('카운트:',state.count);
-    if(state.count > 0){
-        ShowCount.textContent = state.count;
+    console.log('카운트:',state.currentCount);
+    if(state.currentCount > 0){
+        ShowCount.textContent = state.currentCount;
         message.textContent = state.text;
         scoreCom.textContent = state.comScore;
         scoreUser.textContent = state.userScore;
@@ -323,8 +302,8 @@ const render = () => {
             userShootBtn2.classList.remove('off');
             userShootBtn3.classList.remove('off');
         }
-    }else if(state.count === 0){
-        ShowCount.textContent = state.count;
+    }else if(state.currentCount === 0){
+        ShowCount.textContent = state.currentCount;
         message.textContent = state.text;
         userShootBtn2.classList.add('off');
         userShootBtn3.classList.add('off');
@@ -356,13 +335,14 @@ CountButtons[2].onclick = () => {
 
 startBtn.onclick = () => {
     const state = store.getState();
-    state.selected ? store.dispatch(start()) : store.dispatch(error());
+    const initialCount = state.selectedCount;
+    state.selected ? store.dispatch(start(initialCount)) : store.dispatch(error());
 };
 
 comShootBtn.onclick = (event) => {
     const state =store.getState();
     let TARGET = state.turn;
-    if(state.count === 0 || TARGET === 'user'){
+    if(state.currentCount === 0 || TARGET === 'user'){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
@@ -395,7 +375,7 @@ comShootBtn.onclick = (event) => {
 userShootBtn2.onclick = (event) => {
     const state = store.getState();
     let TARGET = state.turn;
-    if(state.count === 0 || TARGET === 'com'){
+    if(state.currentCount === 0 || TARGET === 'com'){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
@@ -415,7 +395,7 @@ userShootBtn2.onclick = (event) => {
 userShootBtn3.onclick = (event) => {
     const state = store.getState();
     let TARGET = state.turn;
-    if(state.count === 0 || TARGET === 'com'){
+    if(state.currentCount === 0 || TARGET === 'com'){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
