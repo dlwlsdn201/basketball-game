@@ -2,11 +2,13 @@
   * Created by HTML5 / SCSS / JavaScript(ES6)*
 
 ## **Preview**
-
 <wide>
+ 
 ![Preview](https://user-images.githubusercontent.com/53039583/112788307-8f155980-9095-11eb-971c-b8bf4b05a791.png)
 
+
 <mobile>
+ 
 ![Preview-mobile](https://user-images.githubusercontent.com/53039583/112788814-aa349900-9096-11eb-8ee0-81873e3f9545.png)
 
 
