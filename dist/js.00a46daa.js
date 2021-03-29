@@ -879,7 +879,7 @@ exports.devToolsEnhancer =
         };
       };
 
-},{"redux":"node_modules/redux/es/redux.js"}],"index.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1442,7 +1442,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49981" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1618,5 +1618,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/basketball-game__github.e31bb0bc.js.map
+},{}]},{},["C:/Users/dlwls/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
+//# sourceMappingURL=/js.00a46daa.js.map

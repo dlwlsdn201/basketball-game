@@ -4,5 +4,10 @@
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.9"
+  },
+  "scripts": {
+    "dev":"parcel index.html",
+    "watch": "parcel watch index.js",
+    "build": "parcel build index.js"
   }
 }
