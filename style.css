@@ -90,11 +90,11 @@ hr {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  padding: 1rem 0;
+  padding: 1rem 0 0.5rem;
 }
 
 .container .count-wrapper .countBtn-block {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .container .count-wrapper .countResult-block {
@@ -192,5 +192,64 @@ hr {
 .container .control-wrapper .off:hover {
   cursor: not-allowed;
   background: #888888a8;
+}
+
+@media screen and (max-width: 381px) {
+  .container .title-wrapper .title {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  .container .control-wrapper {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 1rem;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .container .control-wrapper div[class^="control"] {
+    display: inherit;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .container .control-wrapper input {
+    height: 2.5rem;
+    width: 4.5rem;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .container .control-wrapper .button-block input:nth-child(2) {
+    margin-left: 0.1rem;
+  }
+  .container .control-wrapper .off:hover {
+    cursor: not-allowed;
+    background: #888888a8;
+  }
+}
+
+@media screen and (min-width: 381px) and (max-width: 580px) {
+  .container .title-wrapper .title {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    text-align: center;
+  }
+  .container .count-wrapper .countBtn-block {
+    margin-bottom: 0.5rem;
+  }
+  .container .count-wrapper .countResult-block {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 387px) {
+  .container .message {
+    text-align: center;
+    width: 13rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */
