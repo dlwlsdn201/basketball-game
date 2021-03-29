@@ -1,18 +1,16 @@
 # 리덕스를 이용한 농구 게임 (Self Project #3)
-  * Created by HTML5 / SCSS / JavaScript(ES6)*
+  * Created by HTML5 / SCSS / JavaScript(ES6)
 
-
+---
 ## **Preview**
-<wide>
- 
-![Preview](https://user-images.githubusercontent.com/53039583/112788307-8f155980-9095-11eb-971c-b8bf4b05a791.png)
 
+* [Horizonal Screen]
+<img src="https://user-images.githubusercontent.com/53039583/112788307-8f155980-9095-11eb-971c-b8bf4b05a791.png" width="750" height="500"/>
 
-<mobile>
- 
-![Preview-mobile](https://user-images.githubusercontent.com/53039583/112788814-aa349900-9096-11eb-8ee0-81873e3f9545.png)
+* [Vertical Screen]
+ <img src="https://user-images.githubusercontent.com/53039583/112788814-aa349900-9096-11eb-8ee0-81873e3f9545.png" width="300" height="480"/>
 
-
+---
 
 ## **Features**
 **1.Vanila JavaScript**
@@ -27,6 +25,7 @@
 **3. HTML5
   - innerHTML 메서드를 이용하여 태그 요소들을 함수형으로 구성.
   
+---
   
  ## **Try to experience**
   : https://dlwlsdn201.github.io/basketball-game
