@@ -1,8 +1,19 @@
-html,body{ 
+//palette-----------------
+$textDefault : #F2D5D5;
+$textHighlight: #F28585;
+$textTitle : #D9A7A7;
+$background: #262625;
+$wrapper: #49794b83;
+$block: #D9A7A7;
+//-------------------------
+html,body {
     margin: 0;
     padding: 0;
     height: 100%;
+    background: black;
 }
+
+
 
 h2 {
     margin: 0;
@@ -17,17 +28,17 @@ hr{
     box-sizing: border-box;
     width: 100%;
     padding: 0;
-    margin-top : 1%;
-    margin-bottom: 4%;
+    margin: 0;
+    margin-top : 5%;
 }
 
 .container {
-    background: black;
+    
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    color: white;
-    padding: 1rem 0;
+    color: $textDefault;
+    padding: 1rem 0 0;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -43,7 +54,7 @@ hr{
         outline: none;
         padding: 0.5rem;
         width: 4rem;
-
+        background-color: $textDefault;
         &:hover {
             background-color: #9df4ff;
             cursor: pointer;
@@ -57,9 +68,11 @@ hr{
     .title-wrapper {
         display: inherit;
         justify-content: center;
-        color: #c99d25;
+        margin-bottom: 1rem;
+        color: $textTitle;
         .title {
             font-size: 2.5rem;
+            font-family: 'Chango', sans-serif, 'Times New Roman', Times, serif;
         }
     }
 
@@ -68,7 +81,7 @@ hr{
         justify-content: center;
         align-items: center;
         flex-flow: column nowrap;
-        padding: 1rem 0 0.5rem;
+        padding: 1rem 0 0;
 
         .countBtn-block {
             margin-bottom: 1rem;
@@ -76,6 +89,11 @@ hr{
 
         .countResult-block {
             font-size: 1.2rem;
+
+            .count-result {
+                font-size: 1.6rem;
+                font-family: 'Gugi';
+            }
         }
     }
 
@@ -86,7 +104,7 @@ hr{
         padding: 1rem 0;
         
         .board-block {
-            background-color: #122e13;
+            background-color: $wrapper;
             display: inherit;
             flex-direction: row;
             justify-content: space-around;
@@ -117,25 +135,36 @@ hr{
         .resultMessage{
             visibility: hidden;
             height: 1rem;
+            font-size: 1.5rem;
+            color: $textHighlight;
         }
-        input {
+        
+        #startBtn{
             height: 3rem;
-            width: 4rem;
+            width: 5rem;
             border-radius: 15px;
             font-size: 1.3rem;
+        }
+
+        .message {
+            color: $textDefault;
+            font-size: 1.2rem;
         }
     }
 
     .control-wrapper {
         justify-content: space-around;
-        padding: 1rem 0;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 5% 0;
+        height: 30%;
+        background-color: $wrapper;
 
         div[class^="control"] {
             display: inherit;
             flex-flow: column nowrap;
             align-items: center;
         }
-
         input {
             height: 3rem;
             width: 5rem;
@@ -147,8 +176,8 @@ hr{
                     margin-left: 1rem;
             }
         }
-
         .off {
+            background: #888888a8;
             &:hover{
                 cursor: not-allowed;
                 background: #888888a8;
@@ -185,13 +214,6 @@ hr{
     
                 input:nth-child(2) {
                         margin-left: 0.1rem;
-                }
-            }
-    
-            .off {
-                &:hover{
-                    cursor: not-allowed;
-                    background: #888888a8;
                 }
             }
         }

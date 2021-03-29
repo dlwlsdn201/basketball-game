@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background: black;
 }
 
 h2 {
@@ -18,18 +19,17 @@ hr {
           box-sizing: border-box;
   width: 100%;
   padding: 0;
-  margin-top: 1%;
-  margin-bottom: 4%;
+  margin: 0;
+  margin-top: 5%;
 }
 
 .container {
-  background: black;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
   height: 100%;
-  color: white;
-  padding: 1rem 0;
+  color: #F2D5D5;
+  padding: 1rem 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,6 +55,7 @@ hr {
   outline: none;
   padding: 0.5rem;
   width: 4rem;
+  background-color: #F2D5D5;
 }
 
 .container input[type="button"]:hover {
@@ -71,11 +72,13 @@ hr {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #c99d25;
+  margin-bottom: 1rem;
+  color: #D9A7A7;
 }
 
 .container .title-wrapper .title {
   font-size: 2.5rem;
+  font-family: 'Chango', sans-serif, 'Times New Roman', Times, serif;
 }
 
 .container .count-wrapper {
@@ -90,7 +93,7 @@ hr {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  padding: 1rem 0 0.5rem;
+  padding: 1rem 0 0;
 }
 
 .container .count-wrapper .countBtn-block {
@@ -99,6 +102,11 @@ hr {
 
 .container .count-wrapper .countResult-block {
   font-size: 1.2rem;
+}
+
+.container .count-wrapper .countResult-block .count-result {
+  font-size: 1.6rem;
+  font-family: 'Gugi';
 }
 
 .container .scoreBoard-wrapper {
@@ -116,7 +124,7 @@ hr {
 }
 
 .container .scoreBoard-wrapper .board-block {
-  background-color: #122e13;
+  background-color: #49794b83;
   display: inherit;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -164,19 +172,33 @@ hr {
 .container .scoreBoard-wrapper .resultMessage {
   visibility: hidden;
   height: 1rem;
+  font-size: 1.5rem;
+  color: #F28585;
 }
 
-.container .scoreBoard-wrapper input {
+.container .scoreBoard-wrapper #startBtn {
   height: 3rem;
-  width: 4rem;
+  width: 5rem;
   border-radius: 15px;
   font-size: 1.3rem;
+}
+
+.container .scoreBoard-wrapper .message {
+  color: #F2D5D5;
+  font-size: 1.2rem;
 }
 
 .container .control-wrapper {
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  padding: 1rem 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5% 0;
+  height: 30%;
+  background-color: #49794b83;
 }
 
 .container .control-wrapper div[class^="control"] {
@@ -198,6 +220,10 @@ hr {
 
 .container .control-wrapper .button-block input:nth-child(2) {
   margin-left: 1rem;
+}
+
+.container .control-wrapper .off {
+  background: #888888a8;
 }
 
 .container .control-wrapper .off:hover {
@@ -236,10 +262,6 @@ hr {
   }
   .container .control-wrapper .button-block input:nth-child(2) {
     margin-left: 0.1rem;
-  }
-  .container .control-wrapper .off:hover {
-    cursor: not-allowed;
-    background: #888888a8;
   }
 }
 
