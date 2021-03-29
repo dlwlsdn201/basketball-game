@@ -1,6 +1,7 @@
 # 리덕스를 이용한 농구 게임 (Self Project #3)
   * Created by HTML5 / SCSS / JavaScript(ES6)*
 
+
 ## **Preview**
 <wide>
  
