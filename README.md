@@ -5,8 +5,12 @@
 ## **Preview**
 
 * [Horizonal Screen]
-<img src="https://user-images.githubusercontent.com/53039583/112788307-8f155980-9095-11eb-971c-b8bf4b05a791.png" width="750" height="500"/>
-
+<div align="center" display="flex" flex-direction="column" align-items="center">
+ <img src="https://user-images.githubusercontent.com/53039583/112788307-8f155980-9095-11eb-971c-b8bf4b05a791.png" alt="가로스크린" width="750" height="500"/>
+ <p align="center">
+  가로 스크린 레이아웃
+ </p>
+</div>
 * [Vertical Screen]
  <img src="https://user-images.githubusercontent.com/53039583/112788814-aa349900-9096-11eb-8ee0-81873e3f9545.png" width="300" height="480"/>
 
