@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "gh-pages": "^3.1.0",
     "global": "^4.4.0",
     "nodeJS": "^1.0.0",
+    "parcel": "^2.0.0-beta.2",
     "parcel-bundler": "^1.12.5",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
@@ -13,10 +15,13 @@
     "build-dev": "parcel build index.html --no-minify --public-url ./",
     "prebuild": "shx rm -rf dist/*",
     "build": "parcel build index.html --public-url ./",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "push-gh-pages": "gh-pages -d dist"
   },
   "devDependencies": {
-    "shx": "^0.3.3"
+    "redux": "^4.0.5",
+    "shx": "^0.3.3",
+    "gh-pages": "^3.1.0"
   },
-  "type": "module"
+    "type": "module",
+    "homepage" : "https://dlwlsdn201.github.io/basketball-game/"
 }
