@@ -2,7 +2,6 @@ import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 const CountButtons =  document.querySelectorAll('#countBtn');
-
 const ShowCount = document.querySelector('#countShow');
 const startBtn = document.querySelector('#startBtn');
 const message = document.querySelector('#message');
@@ -339,7 +338,7 @@ startBtn.onclick = () => {
 comShootBtn.onclick = (event) => {
     const state =store.getState();
     let TARGET = state.turn;
-    if(state.currentCount === 0 || TARGET === 'user'){
+    if(state.currentCount === 0 || TARGET === 'user' || TARGET === null){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
@@ -370,7 +369,7 @@ comShootBtn.onclick = (event) => {
 userShootBtn2.onclick = (event) => {
     const state = store.getState();
     let TARGET = state.turn;
-    if(state.currentCount === 0 || TARGET === 'com'){
+    if(state.currentCount === 0 || TARGET === 'com' || TARGET === null){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";
@@ -389,7 +388,7 @@ userShootBtn2.onclick = (event) => {
 userShootBtn3.onclick = (event) => {
     const state = store.getState();
     let TARGET = state.turn;
-    if(state.currentCount === 0 || TARGET === 'com'){
+    if(state.currentCount === 0 || TARGET === 'com' || TARGET === null){
         event.preventDefault();
     }else{
         resultMessage.style.visibility = "visible";

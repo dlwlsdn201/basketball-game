@@ -8,15 +8,12 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "prebuild-dev": "shx rm -rf dist/*",
-    "build-dev": "parcel build index.html --no-minify --public-url ./",
-    "prebuild": "shx rm -rf dist/*",
-    "build": "parcel build index.html --public-url ./",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "predeploy": "rm -rf dist && parcel build index.html --public-url 'https://dlwlsdn201.github.io/basketball-game/' && cp CNAME ./dist",
+    "deploy": "gh-pages -d dist",
+    "start": "parcel index.html"
   },
   "devDependencies": {
-    "shx": "^0.3.3"
-  },
-  "type": "module"
+    "shx": "^0.3.3",
+    "parcel": "latest"
+  }
 }
