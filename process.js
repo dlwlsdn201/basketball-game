@@ -2,9 +2,9 @@ import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 const CountButtons =  document.querySelectorAll('#countBtn');
-const ShowCount = document.querySelector('#countShow');
+const ShowCount = document.querySelector('#countResult');
 const startBtn = document.querySelector('#startBtn');
-const message = document.querySelector('#message');
+const stateMessage = document.querySelector('#stateMessage');
 const resultMessage = document.querySelector('#resultMessage');
 const scoreCom = document.querySelector('.score-com');
 const scoreUser = document.querySelector('.score-user');
@@ -26,10 +26,10 @@ const REMAIN_COUNT = 'count/REMAIN_COUNT';
 const SUCCESS_OR_FALSE2 = 'success/SUCCESS_OR_FALSE2';
 const SUCCESS_OR_FALSE3 = 'success/SUCCESS_OR_FALSE3';
 
-const START = 'message/START';
-const COM = 'message/COM';
-const USER = 'message/USER';
-const ERROR = 'message/ERROR';
+const START = 'stateMessage/START';
+const COM = 'stateMessage/COM';
+const USER = 'stateMessage/USER';
+const ERROR = 'stateMessage/ERROR';
 const SUCCESS2 = 'resultMessage/SUCCESS2';
 const SUCCESS3 = 'resultMessage/SUCCESS3';
 const FAIL2 = 'resultMessage/FAIL2';
@@ -273,11 +273,11 @@ const store = createStore(reducer, composeWithDevTools());
 const compare =() => {
     const state = store.getState();
     if (state.comScore > state.userScore){
-        message.textContent = 'com 승리!';
+        stateMessage.textContent = 'com 승리!';
     }else if (state.comScore < state.userScore){
-        message.textContent = '유저 승리!';
+        stateMessage.textContent = '유저 승리!';
     }else{ 
-        message.textContent = '무승부';
+        stateMessage.textContent = '무승부';
     };
 }
 
@@ -286,7 +286,7 @@ const render = () => {
     const state =store.getState();
     if(state.currentCount > 0){
         ShowCount.textContent = state.currentCount;
-        message.textContent = state.text;
+        stateMessage.textContent = state.text;
         scoreCom.textContent = state.comScore;
         scoreUser.textContent = state.userScore;
         resultMessage.textContent = state.resultText;
@@ -301,12 +301,12 @@ const render = () => {
         }
     }else if(state.currentCount === 0){
         ShowCount.textContent = state.currentCount;
-        message.textContent = state.text;
+        stateMessage.textContent = state.text;
         userShootBtn2.classList.add('off');
         userShootBtn3.classList.add('off');
         compare();
     }else{
-        message.textContent = state.text;
+        stateMessage.textContent = state.text;
         comShootBtn.classList.add('off');
         userShootBtn2.classList.add('off');
         userShootBtn3.classList.add('off');

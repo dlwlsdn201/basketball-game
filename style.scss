@@ -19,7 +19,7 @@ h2 {
     margin: 0;
     padding: 0;
 
-    &[class="name"] {
+    &[class$="name"] {
         margin-bottom : 1rem;
     }
 }
@@ -69,7 +69,7 @@ hr{
         justify-content: center;
         margin-bottom: 1rem;
         color: $textTitle;
-        .title {
+        .title-item {
             font-size: 2.5rem;
             font-family: 'Chango', sans-serif, 'Times New Roman', Times, serif;
         }
@@ -102,7 +102,7 @@ hr{
         align-items: center;
         padding: 1rem 0;
         
-        .board-block {
+        .scoreBoard-block {
             background-color: $wrapper;
             display: inherit;
             flex-direction: row;
@@ -145,7 +145,7 @@ hr{
             font-size: 1.3rem;
         }
 
-        .message {
+        .stateMessage {
             color: $textDefault;
             font-size: 1.2rem;
             margin-top: 0;
@@ -169,7 +169,7 @@ hr{
             width: 5rem;
             font-size: 1.3rem;
         }
-        .button-block {
+        .userShootBtn-block {
 
             input:nth-child(2) {
                     margin-left: 1rem;
@@ -209,7 +209,7 @@ hr{
                 font-size: 1.1rem;
                 text-align: center;
             }
-            .button-block {
+            .userShootBtn-block {
     
                 input:nth-child(2) {
                         margin-left: 0.1rem;
@@ -217,7 +217,7 @@ hr{
             }
         }
 
-        .message{
+        .stateMessage{
             text-align: center;
             width: 16rem;
         }
@@ -244,7 +244,7 @@ hr{
             }
         }
 
-        .message{
+        .stateMessage{
             text-align: center;
             width: 16rem;
         }

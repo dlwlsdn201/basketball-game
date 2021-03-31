@@ -10,7 +10,7 @@ h2 {
   padding: 0;
 }
 
-h2[class="name"] {
+h2[class$="name"] {
   margin-bottom: 1rem;
 }
 
@@ -75,7 +75,7 @@ hr {
   color: #D9A7A7;
 }
 
-.container .title-wrapper .title {
+.container .title-wrapper .title-item {
   font-size: 2.5rem;
   font-family: 'Chango', sans-serif, 'Times New Roman', Times, serif;
 }
@@ -122,7 +122,7 @@ hr {
   padding: 1rem 0;
 }
 
-.container .scoreBoard-wrapper .board-block {
+.container .scoreBoard-wrapper .scoreBoard-block {
   background-color: #49794b83;
   display: inherit;
   -webkit-box-orient: horizontal;
@@ -138,7 +138,7 @@ hr {
   padding: 1rem 0;
 }
 
-.container .scoreBoard-wrapper .board-block div[class^="board"] {
+.container .scoreBoard-wrapper .scoreBoard-block div[class^="board"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,7 +151,7 @@ hr {
           align-items: center;
 }
 
-.container .scoreBoard-wrapper .board-block div[class^="score"] {
+.container .scoreBoard-wrapper .scoreBoard-block div[class^="score"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -182,7 +182,7 @@ hr {
   font-size: 1.3rem;
 }
 
-.container .scoreBoard-wrapper .message {
+.container .scoreBoard-wrapper .stateMessage {
   color: #F2D5D5;
   font-size: 1.2rem;
   margin-top: 0;
@@ -217,7 +217,7 @@ hr {
   font-size: 1.3rem;
 }
 
-.container .control-wrapper .button-block input:nth-child(2) {
+.container .control-wrapper .userShootBtn-block input:nth-child(2) {
   margin-left: 1rem;
 }
 
@@ -259,10 +259,10 @@ hr {
     font-size: 1.1rem;
     text-align: center;
   }
-  .container .control-wrapper .button-block input:nth-child(2) {
+  .container .control-wrapper .userShootBtn-block input:nth-child(2) {
     margin-left: 0.1rem;
   }
-  .container .message {
+  .container .stateMessage {
     text-align: center;
     width: 16rem;
   }
@@ -280,7 +280,7 @@ hr {
   .container .count-wrapper .countResult-block {
     font-size: 1.2rem;
   }
-  .container .message {
+  .container .stateMessage {
     text-align: center;
     width: 16rem;
   }
