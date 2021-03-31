@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's play basketball game! </title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chango&family=Gaegu&display=swap');
+    </style>
 </head>
 <body>
-    Test
+    <div class="container">
+        <div class="title-wrapper" id="titleWrapper"></div>
+        <div class="count-wrapper" id="countWrapper"></div>
+        <div class="scoreBoard-wrapper" id="scoreBoardWrapper"></div>
+        <div class="result-wrapper" id="resultWrapper"></div>
+        <hr/>
+        <div class="control-wrapper" id="controlWrapper"></div>
+    </div>
+<script>
+    function title(){
+        document.querySelector('#titleWrapper').innerHTML = `
+        <span class="title-item"> Play basketball game </span>        
+    `
+};
+    function count(){
+        document.querySelector('#countWrapper').innerHTML = `
+        <div class="countBtn-block">
+            <input id="countBtn" type="button" value="10회"></input>
+            <input id="countBtn" type="button" value="20회"></input>
+            <input id="countBtn" type="button" value="30회"></input>
+        </div>
+        <div class="countResult-block" id="countResultBlock">
+            <span class="text-item">남은 슛 횟수 :</span>
+            <span class="count-item" id="countResult">0</span>
+        </div>
+        `
+    };
+
+    function scoreBoard(){
+        document.querySelector('#scoreBoardWrapper').innerHTML = `
+            <div class="scoreBoard-block">
+                <div class="board-com">
+                    <h2 class="board-name">컴퓨터</h2>
+                    <div class="score-com"></div>
+                </div>
+                <div class="board-user">
+                    <h2 class="board-name">사용자</h2>
+                    <div class="score-user"></div>
+                </div>
+            </div>
+            <p class="resultMessage" id="resultMessage">슛 결과</p>
+            <p class="stateMessage" id="stateMessage"></p>
+            <input id="startBtn" type="button" value="Start"/>
+        `
+    };
+
+    function control(){
+        document.querySelector('#controlWrapper').innerHTML = `
+            <div class="control-com">
+                <h2 class="control-name">컴퓨터</h2>
+                <input id="comShootBtn" 
+                    type="button" 
+                    name="com" 
+                    value="랜덤슛"/>
+            </div>
+            <div class="control-user">
+                <h2 class="control-name">사용자</h2>
+                <div class="userShootBtn-block">
+                    <input id="userShootBtn2" name="user" type="button" value="2점슛"/>
+                    <input id="userShootBtn3" name="user" type="button" value="3점슛"/>
+                </div>
+            </div>
+        `
+    };
+
+
+    title();
+    count();
+    scoreBoard();
+    control();
+</script>
+
+<script type="module" src="./process.js"></script>
 </body>
 </html>
