@@ -29,7 +29,7 @@
   
 **2. CSS3**
   - flex 스타일을 기반으로 한 레이아웃
-  - SCSS 이용 
+  - SCSS 사용
   - media query를 사용한 반응형 레이아웃 
   
 **3. HTML5
