@@ -1,4 +1,4 @@
-# 리덕스를 이용한 농구 게임 (Self Project #3)
+# 컴퓨터와 대결하는 농구 게임 (Self Project #3)
   * Created by HTML5 / SCSS / JavaScript(ES6)
 
 ---
@@ -24,13 +24,13 @@
 
 ## **Features**
 **1.Vanila JavaScript**
-  - Redux 라이브러리를 이용한 데이터 상태 관리
+  - Redux 라이브러리를 이용한 데이터 관리
   
   
 **2. CSS3**
   - flex 스타일을 기반으로 한 레이아웃
   - SCSS 사용
-  - media query를 사용한 반응형 레이아웃 
+  - media query를 사용한 모바일/컴퓨터 반응형 레이아웃 
   
 **3. HTML5
   - innerHTML 메서드를 이용하여 태그 요소들을 함수형으로 구성.
